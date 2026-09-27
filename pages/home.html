@@ -1,0 +1,142 @@
+<!-- HERO SECTION -->
+<section class="hero hero-new position-relative overflow-hidden">
+    <div class="hero-shade"></div>
+    <div class="hero-orbit hero-orbit-one"></div>
+    <div class="hero-orbit hero-orbit-two"></div>
+    <div class="container hero-layout">
+        <div class="hero-text">
+            <span class="hero-label"><i class="fa-solid fa-sparkles me-2"></i>YOUR FAN UNIVERSE STARTS HERE</span>
+            <h1>Find your next <span>obsession.</span></h1>
+            <p class="hero-subtitle">One welcoming place for the stories, characters, art, and sounds you love.</p>
+            <div class="hero-actions">
+                <a href="#categories-section" class="hero-button"><i class="fa-solid fa-compass me-2"></i>Explore the worlds</a>
+                <a href="?page=articles"  class="secondary-button"><i class="fa-regular fa-newspaper me-2"></i>Read a fan guide</a>
+            </div>
+            <div class="hero-facts">
+                <span><strong>07</strong> fan worlds</span><span><strong>35+</strong> character profiles</span><span><strong>01</strong> licensed soundtrack</span>
+            </div>
+        </div>
+        <div class="hero-art" aria-label="A preview of FandomVerse art">
+            <div class="hero-art-ring"></div>
+            <figure class="hero-picture hero-picture-main"><img src="images/hero-image.jpeg" alt="Anime-inspired FandomVerse artwork"><figcaption>Find your world</figcaption></figure>
+            <figure class="hero-picture hero-picture-left"><img src="images/demon-slayer.jpg" alt="Anime fan art"><figcaption>Stories</figcaption></figure>
+            <figure class="hero-picture hero-picture-right"><img src="images/one-piece.jpeg" alt="Manga fan art"><figcaption>Characters</figcaption></figure>
+            <div class="hero-note"><i class="fa-solid fa-headphones"></i><span><strong>Listen in</strong><small>Original audio, too</small></span></div>
+            <div class="hero-spark hero-spark-one">✦</div><div class="hero-spark hero-spark-two">✧</div>
+        </div>
+    </div>
+    <nav class="hero-bottom-line" aria-label="Explore FandomVerse"><a href="?page=articles">Stories</a><i></i><a href="?page=characters">Characters</a><i></i><a href="?page=gallery">Images</a><i></i><a href="?page=audio">Audio</a><i></i><a href="?page=events" data-page="events">Events</a></nav>
+</section>
+
+<!-- 1. CATEGORIES GRID SECTION -->
+<section id="categories-section" class="site-section py-5">
+    <div class="container-fluid px-4">
+        <div class="section-title mb-5 text-center text-md-start">
+            <span class="section-note">DISCOVER COMMUNITIES</span>
+            <h2 class="fw-bold text-white display-6">
+                <i class="fa-solid fa-layer-group me-2 purple-icon"></i>Explore <span class="purple-text">Categories</span>
+            </h2>
+            <div class="title-line"></div>
+        </div>
+        <div class="category-row" id="CategoryListing">
+            <!-- Dynamically populated via jQuery AJAX -->
+        </div>
+    </div>
+</section>
+
+<!-- 2. FEATURED CONTENT HIGHLIGHTS -->
+<section class="site-section py-5 bg-dark-secondary">
+    <div class="container-fluid px-4">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-5">
+            <div class="section-title m-0">
+                <span class="section-note">HANDPICKED CONTENT</span>
+                <h2 class="fw-bold text-white display-6">
+                    <i class="fa-solid fa-fire me-2 purple-icon"></i>Featured <span class="purple-text">Highlights</span>
+                </h2>
+                <div class="title-line"></div>
+            </div>
+        </div>
+        <div class="row g-4" id="FeaturedListing">
+            <!-- Dynamically populated via jQuery AJAX -->
+        </div>
+    </div>
+</section>
+
+<!-- 3. TRAILERS & MEDIA PREVIEW -->
+<section class="site-section py-5">
+    <div class="container-fluid px-4">
+        <div class="section-title mb-5">
+            <span class="section-note">WATCH & LISTEN</span>
+            <h2 class="fw-bold text-white display-6">
+                <i class="fa-solid fa-clapperboard me-2 purple-icon"></i>Latest <span class="purple-text">Trailers</span>
+            </h2>
+            <div class="title-line"></div>
+        </div>
+        <div class="row g-4" id="TrailersListing">
+            <!-- Dynamically populated via jQuery AJAX -->
+        </div>
+    </div>
+</section>
+
+<!-- 4. UPCOMING EVENTS SHOWCASE -->
+<section class="site-section py-5 bg-dark-secondary">
+    <div class="container-fluid px-4">
+        <div class="section-title mb-5">
+            <span class="section-note">CONVENTIONS AND COMMUNITY IDEAS</span>
+            <h2 class="fw-bold text-white display-6">
+                <i class="fa-regular fa-calendar-days me-2 purple-icon"></i>Event <span class="purple-text">Highlights</span>
+            </h2>
+            <div class="title-line"></div>
+        </div>
+        <div class="row g-4" id="EventsListing">
+            <!-- Dynamically populated via jQuery AJAX -->
+        </div>
+    </div>
+</section>
+
+<section class="site-section py-5">
+    <div class="container-fluid px-4">
+        <div class="section-title mb-5">
+            <span class="section-note">MARK YOUR CALENDAR</span>
+            <h2 class="fw-bold text-white display-6"><i class="fa-regular fa-calendar-check me-2 purple-icon"></i>Upcoming <span class="purple-text">Releases</span></h2>
+            <p class="section-note">Dates can change. Use each official link for the latest details.</p>
+            <div class="title-line"></div>
+        </div>
+        <div class="row g-4" id="ReleaseListing"></div>
+    </div>
+</section>
+
+<!-- 5. MERCHANDISE SHOWCASE -->
+<section class="site-section py-5">
+    <div class="container-fluid px-4">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-5">
+            <div class="section-title m-0">
+                <span class="section-note">EXCLUSIVE COLLECTIBLES</span>
+                <h2 class="fw-bold text-white display-6">
+                    <i class="fa-solid fa-bag-shopping me-2 purple-icon"></i>Merchandise <span class="purple-text">Showcase</span>
+                </h2>
+                <div class="title-line"></div>
+            </div>
+            <a href="?page=shop" data-page="shop" class="btn purple-outline-button rounded-pill px-4 mt-3 mt-md-0">
+                View All Merch <i class="fa-solid fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+        <div class="row g-4" id="MerchListing">
+            <!-- Dynamically populated via jQuery AJAX -->
+        </div>
+    </div>
+</section>
+
+<section class="site-section py-5 home-characters-section">
+    <div class="container-fluid px-4">
+        <div class="section-title mb-5">
+            <span class="section-note">MEET THE FACES OF YOUR FAVORITE STORIES</span>
+            <h2 class="fw-bold text-white display-6"><i class="fa-solid fa-user-group me-2 purple-icon"></i>Character <span class="purple-text">Profiles</span></h2>
+            <div class="title-line"></div>
+        </div>
+        <div class="home-character-row" id="HomeCharacterListing"></div>
+        <a href="?page=characters" data-page="characters" class="simple-button home-character-link">Explore all characters <i class="fa-solid fa-arrow-right ms-2"></i></a>
+    </div>
+</section>
+
+

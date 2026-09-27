@@ -1,0 +1,20 @@
+<section class="page-wrap character-page">
+  <header class="page-heading feature-heading character-heading">
+    <span class="eyebrow">ORIGINAL COMMUNITY PROFILES</span>
+    <h1>Characters with <span>stories.</span></h1>
+    <p>Browse profiles, discover their worlds, and save your favorite characters.</p>
+  </header>
+  <div class="page-tools character-tools">
+    <label for="characterCategory">Choose a community</label>
+    <select class="form-select" id="characterCategory"><option value="all">All communities</option></select>
+    <label for="characterSeries">Choose a series</label>
+    <select class="form-select" id="characterSeries"><option value="all">All series</option></select>
+  </div>
+  <div class="character-grid" id="CharactersGrid" aria-live="polite"></div>
+</section>
+<div class="modal fade" id="characterModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content character-modal">
+    <div class="modal-header"><h2 class="modal-title" id="characterModalTitle">Character</h2><button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+    <div class="modal-body" id="characterModalBody"></div>
+  </div></div>
+</div>

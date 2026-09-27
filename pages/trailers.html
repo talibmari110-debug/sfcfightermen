@@ -1,0 +1,113 @@
+<section class="py-5 bg-dark-main position-relative overflow-hidden">
+  <!-- Glowing Ambient Lights -->
+  <div class="glow-circle orb-top-left"></div>
+  <div class="glow-circle orb-bottom-right"></div>
+
+  <div class="container-fluid px-4 px-lg-5 position-relative z-2">
+    
+    <!-- PAGE HEADER -->
+    <div class="row align-items-center mb-5 pb-4 border-bottom border-secondary-subtle">
+      <div class="col-lg-7 mb-3 mb-lg-0">
+        <span class="category-label mb-2 d-inline-flex align-items-center">
+          <i class="fa-solid fa-clapperboard me-2"></i>CINEMATIC MEDIA HUB
+        </span>
+        <h1 class="display-4 fw-black text-white m-0 tracking-tight">
+          Trailers & <span class="purple-text">Teasers</span>
+        </h1>
+        <p class="text-muted mt-2 mb-0 lead-sm">
+          Watch official trailers, gameplay reveals, music videos, and exclusive behind-the-scenes previews.
+        </p>
+      </div>
+
+      <!-- MEDIA CATEGORY PILL FILTER BAR -->
+      <div class="col-lg-5">
+        <div class="d-flex flex-wrap justify-content-lg-end gap-2" id="TrailerCategoryPills">
+          <button class="btn btn-pill-filter active" data-cat="all"><i class="fa-solid fa-border-all me-1"></i> All</button>
+          <button class="btn btn-pill-filter" data-cat="anime"><i class="fa-solid fa-tv me-1"></i> Anime</button>
+          <button class="btn btn-pill-filter" data-cat="gaming"><i class="fa-solid fa-gamepad me-1"></i> Gaming</button>
+          <button class="btn btn-pill-filter" data-cat="movies"><i class="fa-solid fa-film me-1"></i> Movies</button>
+          <button class="btn btn-pill-filter" data-cat="kpop"><i class="fa-solid fa-music me-1"></i> K-Pop</button>
+          <button class="btn btn-pill-filter" data-cat="tv-shows">TV Shows</button>
+          <button class="btn btn-pill-filter" data-cat="comics">Comics</button>
+          <button class="btn btn-pill-filter" data-cat="manga">Manga</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURED HERO PLAYER SECTION -->
+    <div class="row mb-5" id="FeaturedTrailerHero">
+      <!-- Dynamically populated with top video trailer -->
+    </div>
+
+    <!-- FILTER & SEARCH BAR -->
+    <div class="filter-box mb-5 p-3 p-md-4 rounded-4 shadow-lg">
+      <div class="row g-3 align-items-center">
+        <!-- Live Search -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="input-group search-group">
+            <span class="input-group-text bg-transparent text-purple border-end-0">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <input type="text" id="TrailerSearch" class="form-control bg-transparent text-white border-start-0 ps-0 search-input" placeholder="Search by title, franchise, or tag...">
+          </div>
+        </div>
+
+        <!-- Filter by Media Type -->
+        <div class="col-6 col-md-3 col-lg-3">
+          <select id="TrailerTypeFilter" class="form-select filter-menu">
+            <option value="all">🎬 All Media Types</option>
+            <option value="trailer">🎞️ Official Trailers</option>
+            <option value="interview">Interviews</option>
+            <option value="podcast">Podcasts</option>
+            <option value="fan content">Fan videos</option>
+          </select>
+        </div>
+
+        <!-- Sort Control -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <select id="TrailerSortBy" class="form-select filter-menu">
+            <option value="newest">🔥 Newest Uploads</option>
+            <option value="popular">⭐ Most Popular</option>
+            <option value="alphabetical">🔤 Title (A-Z)</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-3 col-lg-3">
+          <select id="TrailerStatusFilter" class="form-select filter-menu" aria-label="Filter by release status">
+            <option value="all">All release dates</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="recently released">Recently released</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRAILERS GRID -->
+    <div class="row g-4" id="TrailersGrid">
+      <!-- Dynamically populated via jQuery AJAX -->
+    </div>
+
+  </div>
+</section>
+
+<!-- EMBEDDED VIDEO PLAYER MODAL -->
+<div class="modal fade" id="trailerModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content video-modal text-white rounded-4 overflow-hidden border-0">
+      <div class="modal-header border-bottom border-secondary-subtle px-4 py-3">
+        <h5 class="modal-title fw-bold text-truncate" id="trailerModalTitle">Video Player</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" id="btnCloseTrailerModal"></button>
+      </div>
+      <div class="modal-body p-0">
+        <div class="ratio ratio-16x9">
+          <iframe id="trailerPlayerIframe" src="" title="Video Player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="modal-footer border-top border-secondary-subtle px-4 py-3 d-flex justify-content-between">
+        <span class="badge bg-purple-glow" id="trailerModalCategory">CATEGORY</span>
+        <button class="btn btn-sm btn-outline-light rounded-pill" id="btnModalWatchlist">
+          <i class="fa-regular fa-bookmark me-1"></i> Add to Watchlist
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

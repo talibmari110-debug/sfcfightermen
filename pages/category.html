@@ -1,0 +1,120 @@
+<section class="py-5 bg-dark-main">
+  <div class="container-fluid px-4">
+    
+    <!-- HEADER & CATEGORY TITLE -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-3 border-bottom border-secondary">
+      <div>
+        <span class="text-purple fw-bold small text-uppercase tracking-wider">FandomVerse Hubs</span>
+        <h1 class="display-5 fw-bold text-white m-0" id="CategoryTitle">
+          Anime <span class="text-purple">Hub</span>
+        </h1>
+      </div>
+      
+      <!-- QUICK CATEGORY TABS -->
+      <div class="d-flex flex-wrap gap-2 mt-3 mt-md-0" id="CategoryPills">
+        <button class="btn btn-sm btn-outline-purple active" data-cat="all">All</button>
+        <button class="btn btn-sm btn-outline-purple" data-cat="anime">Anime</button>
+        <button class="btn btn-sm btn-outline-purple" data-cat="gaming">Gaming</button>
+        <button class="btn btn-sm btn-outline-purple" data-cat="movies">Movies</button>
+        <button class="btn btn-sm btn-outline-purple" data-cat="tv-shows">TV Shows</button>
+        <button class="btn btn-sm btn-outline-purple" data-cat="kpop">K-Pop</button>
+        <button class="btn btn-sm btn-outline-purple" data-cat="comics">Comics</button>
+        <button class="btn btn-sm btn-outline-purple" data-cat="manga">Manga</button>
+      </div>
+    </div>
+
+    <!-- FILTER & SORT CONTROLS BAR (SRS Requirement) -->
+    <div class="row g-3 mb-4 p-3 bg-dark-custom rounded border border-secondary align-items-center">
+      <!-- Search Input -->
+      <div class="col-12 col-md-4">
+        <div class="input-group">
+          <span class="input-group-text bg-dark text-white border-secondary"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="text" id="FilterSearch" class="form-control bg-dark text-white border-secondary" placeholder="Search title, tags, series...">
+        </div>
+      </div>
+
+      <!-- Filter by Content Type -->
+      <div class="col-6 col-md-2">
+        <select id="FilterType" class="form-select bg-dark text-white border-secondary">
+          <option value="all">All Types</option>
+          <option value="article">Articles</option>
+          <option value="gallery">Galleries</option>
+          <option value="video">Videos</option>
+          <option value="audio">Audio / Podcasts</option>
+          <option value="character">Character profiles</option>
+          <option value="event">Events</option>
+          <option value="merchandise">Merchandise</option>
+          <option value="release">Upcoming releases</option>
+        </select>
+      </div>
+
+      <!-- Sort By -->
+      <div class="col-6 col-md-2">
+        <select id="FilterTag" class="form-select bg-dark text-white border-secondary" aria-label="Filter by tag">
+          <option value="all">All tags</option>
+        </select>
+      </div>
+
+      <!-- Sort By -->
+      <div class="col-6 col-md-2">
+        <select id="SortBy" class="form-select bg-dark text-white border-secondary">
+          <option value="newest">Newest First</option>
+          <option value="popularity">Most Popular</option>
+          <option value="alphabetical">Alphabetical (A-Z)</option>
+        </select>
+      </div>
+
+      <!-- View Toggle Tabs -->
+      <div class="col-12 col-md-2 text-md-end">
+        <div class="btn-group w-100" role="group">
+          <button type="button" class="btn btn-outline-light active" data-view="content">Content</button>
+          <button type="button" class="btn btn-outline-light" data-view="characters">People</button>
+          <button type="button" class="btn btn-outline-light" data-view="gallery">Gallery</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENT CARDS GRID CONTAINER -->
+    <div id="ContentSection">
+      <div class="row g-4" id="CategoryListingGrid">
+        <!-- Dynamically rendered via JS -->
+      </div>
+    </div>
+
+    <!-- CHARACTER PROFILES GRID CONTAINER -->
+    <div id="CharacterSection" style="display: none;">
+      <h3 class="text-white fw-bold mb-4"><i class="fa-solid fa-users me-2 text-purple"></i>Character <span class="text-purple">Profiles</span></h3>
+      <div class="row g-4" id="CharacterListingGrid">
+        <!-- Dynamically rendered via JS -->
+      </div>
+    </div>
+
+    <div id="GallerySection" style="display: none;">
+      <h3 class="text-white fw-bold mb-4">Image <span class="text-purple">Gallery</span></h3>
+      <div class="row g-3" id="GalleryGrid"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CHARACTER / ITEM DETAIL MODAL -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark text-white border-secondary">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title fw-bold" id="modalTitle">Details</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content bg-dark text-white">
+    <div class="modal-header"><h5 class="modal-title" id="imageModalTitle">Gallery</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div>
+    <div class="modal-body"><img id="largeGalleryImage" class="large-gallery-image" alt="Selected gallery image"></div>
+  </div></div>
+</div>

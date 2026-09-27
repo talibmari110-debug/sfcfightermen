@@ -1,0 +1,1369 @@
+{
+  "categories": [
+    {
+      "id": "anime",
+      "name": "Anime"
+    },
+    {
+      "id": "gaming",
+      "name": "Gaming"
+    },
+    {
+      "id": "movies",
+      "name": "Movies"
+    },
+    {
+      "id": "tv-shows",
+      "name": "TV Shows"
+    },
+    {
+      "id": "kpop",
+      "name": "K-Pop"
+    },
+    {
+      "id": "comics",
+      "name": "Comics"
+    },
+    {
+      "id": "manga",
+      "name": "Manga"
+    }
+  ],
+  "contentCards": [
+    {
+      "id": "c-01",
+      "title": "Dark Fantasy Anime: Themes and World-Building",
+      "thumbnail": "images/demon-slayer.jpg",
+      "shortDescription": "A friendly guide to the worlds, characters, and visual ideas that make dark fantasy anime memorable.",
+      "contentType": "article",
+      "category": "anime",
+      "tags": [
+        "dark fantasy",
+        "action",
+        "top 10"
+      ],
+      "popularity": 98,
+      "date": "2026-02-15",
+      "description": "Dark fantasy stories mix mysterious worlds, difficult choices, and striking visual design. This guide looks at the themes fans often discuss when they recommend a series.",
+      "articleSections": [
+        {
+          "heading": "A world with atmosphere",
+          "text": "Dark fantasy often pairs beautiful settings with danger and uncertainty. Strong art direction helps viewers understand the mood before a character even speaks."
+        },
+        {
+          "heading": "Characters make the stakes personal",
+          "text": "The genre works best when its heroes have difficult choices. Fans can follow how a character changes as the world asks more of them."
+        },
+        {
+          "heading": "A good starting point",
+          "text": "Try an episode or chapter, notice the visual details and themes, and then compare your favorite moments with other fans."
+        }
+      ]
+    },
+    {
+      "id": "c-02",
+      "title": "Behind the Scenes: High-Octane Action Stunts",
+      "thumbnail": "images/berserk.jpeg",
+      "shortDescription": "Exclusive look at how modern action blockbusters choreograph practical stunts.",
+      "contentType": "gallery",
+      "category": "movies",
+      "tags": [
+        "cinema",
+        "stunts",
+        "behind the scenes"
+      ],
+      "popularity": 89,
+      "date": "2026-02-10"
+    },
+    {
+      "id": "c-03",
+      "title": "Cyberpunk 2077: Phantom Liberty Official Trailer",
+      "thumbnail": "images/hero-image.jpeg",
+      "shortDescription": "Official gameplay trailer introducing new cybernetic upgrades and spy-thriller story.",
+      "contentType": "video",
+      "category": "gaming",
+      "tags": [
+        "trailer",
+        "rpg",
+        "cyberpunk"
+      ],
+      "popularity": 95,
+      "date": "2026-01-20"
+    },
+    {
+      "id": "c-04",
+      "title": "FandomVerse Anime & Gaming Podcast Ep. 12",
+      "thumbnail": "images/naruto.jpg",
+      "shortDescription": "Listen to our weekly discussion on seasonal anime rankings and game leaks.",
+      "contentType": "audio",
+      "category": "anime",
+      "tags": [
+        "podcast",
+        "discussion",
+        "audio"
+      ],
+      "popularity": 82,
+      "date": "2026-02-01"
+    },
+    {
+      "id": "content-tv-shows-01",
+      "title": "Getting Started with TV Shows",
+      "thumbnail": "images/death-note.jpg",
+      "shortDescription": "A quick introduction to the stories, people, and community around tv shows.",
+      "contentType": "article",
+      "category": "tv-shows",
+      "tags": [
+        "tv shows",
+        "guide",
+        "community"
+      ],
+      "popularity": 67,
+      "date": "2026-09-20",
+      "description": "Explore highlights and fan favorites from tv shows.",
+      "articleSections": [
+        {
+          "heading": "Start with a story you enjoy",
+          "text": "A series can mix comedy, drama, action, or mystery. Pick a theme that interests you and use the episode descriptions to find a comfortable place to begin."
+        },
+        {
+          "heading": "Notice how characters grow",
+          "text": "Longer stories give a cast time to change. A favorite scene or relationship can make a great starting point for a fan discussion."
+        },
+        {
+          "heading": "Make watching social",
+          "text": "Share a recommendation, talk about a spoiler-free moment, or save a show to revisit later."
+        }
+      ]
+    },
+    {
+      "id": "content-kpop-01",
+      "title": "Getting Started with K-Pop",
+      "thumbnail": "images/anime.jpeg",
+      "shortDescription": "A quick introduction to the stories, people, and community around k-pop.",
+      "contentType": "article",
+      "category": "kpop",
+      "tags": [
+        "k-pop",
+        "guide",
+        "community"
+      ],
+      "popularity": 66,
+      "date": "2026-09-20",
+      "description": "Explore highlights and fan favorites from k-pop.",
+      "articleSections": [
+        {
+          "heading": "Music is one part of the picture",
+          "text": "K-pop brings together songs, performance, styling, and visual storytelling. Each release can offer a different mood and concept."
+        },
+        {
+          "heading": "Find the details you enjoy",
+          "text": "You might follow choreography, vocals, music videos, stage performances, or the creative team behind a release."
+        },
+        {
+          "heading": "Celebrate with other fans",
+          "text": "Play a favorite track, share what stood out, and explore how different listeners connect with the same song."
+        }
+      ]
+    },
+    {
+      "id": "content-comics-01",
+      "title": "Getting Started with Comics",
+      "thumbnail": "images/my-hero-academia.jpg",
+      "shortDescription": "A quick introduction to the stories, people, and community around comics.",
+      "contentType": "article",
+      "category": "comics",
+      "tags": [
+        "comics",
+        "guide",
+        "community"
+      ],
+      "popularity": 65,
+      "date": "2026-09-20",
+      "description": "Explore highlights and fan favorites from comics.",
+      "articleSections": [
+        {
+          "heading": "A flexible way to tell stories",
+          "text": "Comics combine words and images to control timing, action, and emotion. A single panel can carry details that take longer to describe in text."
+        },
+        {
+          "heading": "Follow the art as well as the plot",
+          "text": "Color, page layout, and character design help shape the way a story feels. Notice which choices stand out to you."
+        },
+        {
+          "heading": "Build your own reading path",
+          "text": "Begin with a character or genre you like, then explore related stories and compare different creators' styles."
+        }
+      ]
+    },
+    {
+      "id": "content-manga-01",
+      "title": "Getting Started with Manga",
+      "thumbnail": "images/one-piece.jpeg",
+      "shortDescription": "A quick introduction to the stories, people, and community around manga.",
+      "contentType": "article",
+      "category": "manga",
+      "tags": [
+        "manga",
+        "guide",
+        "community"
+      ],
+      "popularity": 64,
+      "date": "2026-09-20",
+      "description": "Explore highlights and fan favorites from manga.",
+      "articleSections": [
+        {
+          "heading": "Find a genre that fits",
+          "text": "Manga includes many styles and audiences, from quiet everyday stories to action and fantasy. Browse a few summaries to find the right starting point."
+        },
+        {
+          "heading": "Read at your own pace",
+          "text": "Panel order and artwork guide the story. Give each page time and look for small visual clues in the background."
+        },
+        {
+          "heading": "Keep a short reading list",
+          "text": "Save a title, share a favorite moment, and ask other readers what they enjoyed without spoiling the story."
+        }
+      ]
+    },
+    {
+      "id": "article-gaming-01",
+      "title": "How Game Worlds Invite You to Explore",
+      "thumbnail": "images/hero-image.jpeg",
+      "shortDescription": "A friendly look at the places, sounds, and small discoveries that make games feel alive.",
+      "description": "Game worlds invite players to look around, learn their layout, and make discoveries at their own pace.",
+      "contentType": "article",
+      "category": "gaming",
+      "tags": [
+        "games",
+        "world design",
+        "guide"
+      ],
+      "popularity": 78,
+      "date": "2026-08-18",
+      "articleSections": [
+        {
+          "heading": "A world that rewards curiosity",
+          "text": "A memorable game setting gives players reasons to look around. Landmarks, paths, and small discoveries make a place easier to remember."
+        },
+        {
+          "heading": "Sound and movement guide the player",
+          "text": "Music, ambient sound, and simple visual cues can help explain where to go and what may be important."
+        },
+        {
+          "heading": "Share what you found",
+          "text": "A hidden route or favorite location can become a fun community tip. Compare how different players explored the same world."
+        }
+      ]
+    },
+    {
+      "id": "article-movies-01",
+      "title": "How Action Movies Build Memorable Scenes",
+      "thumbnail": "images/attack-on-titan.jpg",
+      "shortDescription": "Explore the planning, movement, and visual choices behind a big-screen action moment.",
+      "description": "Action scenes combine clear storytelling, careful movement, camera choices, and sound to help the audience follow the moment.",
+      "contentType": "article",
+      "category": "movies",
+      "tags": [
+        "movies",
+        "action",
+        "guide"
+      ],
+      "popularity": 81,
+      "date": "2026-08-12",
+      "articleSections": [
+        {
+          "heading": "Clarity comes first",
+          "text": "A strong action scene helps the viewer understand where people are and what they are trying to do. Clear movement makes a moment exciting and easy to follow."
+        },
+        {
+          "heading": "Many choices shape one scene",
+          "text": "Actors, stunt teams, camera work, editing, and sound all contribute. Looking at these parts can make a rewatch more interesting."
+        },
+        {
+          "heading": "Watch with fresh eyes",
+          "text": "Choose one sequence and notice how the framing or sound changes the mood. Then share the detail you spotted with another film fan."
+        }
+      ]
+    }
+  ],
+  "characterProfiles": [
+    {
+      "id": "char-an-1",
+      "name": "Kaito Kurogane",
+      "image": "images/demon-slayer.jpg",
+      "series": "Shadow Blade",
+      "category": "anime",
+      "biography": "A rogue swordsman traveling across feudal worlds to restore order to his fallen clan.",
+      "traits": [
+        "Master Swordsman",
+        "Stoic",
+        "Agile"
+      ]
+    },
+    {
+      "id": "char-an-2",
+      "name": "Yuki Tsukuyomi",
+      "image": "images/naruto.jpg",
+      "series": "Celeste High",
+      "category": "anime",
+      "biography": "A gifted sorceress who controls ice magic and moonlight spellcraft.",
+      "traits": [
+        "Ice Magic",
+        "Strategic",
+        "Intelligent"
+      ]
+    },
+    {
+      "id": "char-gm-1",
+      "name": "Commander Vance",
+      "image": "images/hero-image.jpeg",
+      "series": "Cyber Vanguard",
+      "category": "gaming",
+      "biography": "A cybernetically enhanced soldier fighting rival mega-corporations in a dystopian city.",
+      "traits": [
+        "Cybernetic",
+        "Heavy Weapons",
+        "Leader"
+      ]
+    },
+    {
+      "id": "char-kp-1",
+      "name": "Min-jun",
+      "image": "images/anime.jpeg",
+      "series": "SOLARIS",
+      "category": "kpop",
+      "biography": "Main dancer and leader of global sensation boy group SOLARIS.",
+      "traits": [
+        "Choreographer",
+        "Charismatic",
+        "Vocalist"
+      ]
+    },
+    {
+      "id": "char-cm-1",
+      "name": "Sentinel Prime",
+      "image": "images/my-hero-academia.jpg",
+      "series": "Justice Legion",
+      "category": "comics",
+      "biography": "An alien protector wielding cosmic power to defend planetary orbits.",
+      "traits": [
+        "Super Strength",
+        "Flight",
+        "Invulnerable"
+      ]
+    },
+    {
+      "id": "anime-hero-1",
+      "name": "Mei Arata",
+      "image": "images/jujutsu-kaisen.jpg",
+      "series": "The Lantern Between Worlds",
+      "category": "anime",
+      "biography": "A mapmaking apprentice who reads paths hidden in old star charts. Mei checks her compass twice before taking an unfamiliar road.",
+      "traits": [
+        "Map reader",
+        "Patient",
+        "Precise"
+      ]
+    },
+    {
+      "id": "anime-hero-2",
+      "name": "Daichi Ren",
+      "image": "images/demon-slayer.jpg",
+      "series": "The Lantern Between Worlds",
+      "category": "anime",
+      "biography": "A courier who knows the mountain paths by heart. He is brave in a crisis and learning when to accept help.",
+      "traits": [
+        "Courier",
+        "Brave",
+        "Loyal"
+      ]
+    },
+    {
+      "id": "anime-hero-3",
+      "name": "Nami Kurose",
+      "image": "images/naruto.jpg",
+      "series": "The Lantern Between Worlds",
+      "category": "anime",
+      "biography": "A tinkerer who repairs lanterns used to guide travelers home. Her experiments are clever, even when they need a second try.",
+      "traits": [
+        "Tinkerer",
+        "Inventive",
+        "Methodical"
+      ]
+    },
+    {
+      "id": "gaming-hero-1",
+      "name": "Rhea Calder",
+      "image": "images/hero-image.jpeg",
+      "series": "Signal Lost",
+      "category": "gaming",
+      "biography": "A field engineer searches an abandoned station for the source of its repeating distress call. She studies every piece of equipment she finds.",
+      "traits": [
+        "Engineer",
+        "Resourceful",
+        "Steady"
+      ]
+    },
+    {
+      "id": "gaming-hero-2",
+      "name": "Tomas Vale",
+      "image": "images/hero-image.jpeg",
+      "series": "Signal Lost",
+      "category": "gaming",
+      "biography": "A former station guide remembers the route but not why the crew vanished. Tomas is careful with every clue he shares.",
+      "traits": [
+        "Guide",
+        "Cautious",
+        "Perceptive"
+      ]
+    },
+    {
+      "id": "gaming-hero-3",
+      "name": "Pip Rowan",
+      "image": "images/hero-image.jpeg",
+      "series": "Signal Lost",
+      "category": "gaming",
+      "biography": "A maintenance drone with a scratched camera collects broken machine parts. Its recordings help Rhea read the station logs.",
+      "traits": [
+        "Drone",
+        "Helpful",
+        "Persistent"
+      ]
+    },
+    {
+      "id": "gaming-hero-4",
+      "name": "Nia Okafor",
+      "image": "images/hero-image.jpeg",
+      "series": "Signal Lost",
+      "category": "gaming",
+      "biography": "A radio operator picks a faint transmission out of a crowded signal band. She keeps the team connected when systems fail.",
+      "traits": [
+        "Radio operator",
+        "Focused",
+        "Calm"
+      ]
+    },
+    {
+      "id": "movies-hero-1",
+      "name": "Elian Mar",
+      "image": "images/berserk.jpeg",
+      "series": "The Last Projection",
+      "category": "movies",
+      "biography": "A cinema projectionist finds frames missing from an archive and retraces the theater history to learn what they showed.",
+      "traits": [
+        "Projectionist",
+        "Patient",
+        "Film lover"
+      ]
+    },
+    {
+      "id": "movies-hero-2",
+      "name": "Rosa Bell",
+      "image": "images/attack-on-titan.jpg",
+      "series": "The Last Projection",
+      "category": "movies",
+      "biography": "A documentary editor records the people and places an old theater brought together. Rosa listens first and lets the footage tell its story.",
+      "traits": [
+        "Editor",
+        "Thoughtful",
+        "Listener"
+      ]
+    },
+    {
+      "id": "movies-hero-3",
+      "name": "Jules Okada",
+      "image": "images/berserk.jpeg",
+      "series": "The Last Projection",
+      "category": "movies",
+      "biography": "A student volunteer catalogues old posters and ticket stubs. Jules spots a date that links several unrelated films.",
+      "traits": [
+        "Archivist",
+        "Curious",
+        "Organized"
+      ]
+    },
+    {
+      "id": "movies-hero-4",
+      "name": "Mina Sol",
+      "image": "images/attack-on-titan.jpg",
+      "series": "The Last Projection",
+      "category": "movies",
+      "biography": "A local musician composes a score for a theater reopening. She builds the music from sounds recorded around the neighborhood.",
+      "traits": [
+        "Composer",
+        "Creative",
+        "Community minded"
+      ]
+    },
+    {
+      "id": "movies-hero-5",
+      "name": "Theo Park",
+      "image": "images/berserk.jpeg",
+      "series": "The Last Projection",
+      "category": "movies",
+      "biography": "A former usher remembers the theater final night in detail. His account helps the team separate memory from rumor.",
+      "traits": [
+        "Usher",
+        "Reliable",
+        "Historian"
+      ]
+    },
+    {
+      "id": "tv-shows-hero-1",
+      "name": "Nora Finch",
+      "image": "images/death-note.jpg",
+      "series": "Room for One More",
+      "category": "tv-shows",
+      "biography": "A new tenant keeps a notebook of the small favors neighbors do for each other in an old apartment building.",
+      "traits": [
+        "Tenant",
+        "Friendly",
+        "Note taker"
+      ]
+    },
+    {
+      "id": "tv-shows-hero-2",
+      "name": "Caleb Woods",
+      "image": "images/death-note.jpg",
+      "series": "Room for One More",
+      "category": "tv-shows",
+      "biography": "The caretaker knows how every door and boiler works. He is happiest when a practical fix brings people together.",
+      "traits": [
+        "Caretaker",
+        "Helpful",
+        "Practical"
+      ]
+    },
+    {
+      "id": "tv-shows-hero-3",
+      "name": "Imani Brooks",
+      "image": "images/death-note.jpg",
+      "series": "Room for One More",
+      "category": "tv-shows",
+      "biography": "A night-shift nurse leaves messages for neighbors she rarely sees awake. She is learning to make time for her own plans.",
+      "traits": [
+        "Nurse",
+        "Caring",
+        "Independent"
+      ]
+    },
+    {
+      "id": "tv-shows-hero-4",
+      "name": "Eli Navarro",
+      "image": "images/death-note.jpg",
+      "series": "Room for One More",
+      "category": "tv-shows",
+      "biography": "A baker testing recipes in the shared kitchen remembers everyone favorite snack and uses food to start a conversation.",
+      "traits": [
+        "Baker",
+        "Generous",
+        "Creative"
+      ]
+    },
+    {
+      "id": "tv-shows-hero-5",
+      "name": "Sana Cho",
+      "image": "images/death-note.jpg",
+      "series": "Room for One More",
+      "category": "tv-shows",
+      "biography": "A retired teacher runs the building book exchange and turns casual chats into stories worth remembering.",
+      "traits": [
+        "Teacher",
+        "Warm",
+        "Well read"
+      ]
+    },
+    {
+      "id": "kpop-hero-1",
+      "name": "Ara Kim",
+      "image": "images/anime.jpeg",
+      "series": "SOLARIS",
+      "category": "kpop",
+      "biography": "A vocalist keeps a practice journal and enjoys arranging harmonies with the rest of the group.",
+      "traits": [
+        "Vocalist",
+        "Focused",
+        "Good listener"
+      ]
+    },
+    {
+      "id": "kpop-hero-2",
+      "name": "Jae Min",
+      "image": "images/anime.jpeg",
+      "series": "SOLARIS",
+      "category": "kpop",
+      "biography": "A dancer plans stage movement so each performer has room to shine.",
+      "traits": [
+        "Dancer",
+        "Precise",
+        "Team player"
+      ]
+    },
+    {
+      "id": "kpop-hero-3",
+      "name": "Yuna Lee",
+      "image": "images/anime.jpeg",
+      "series": "SOLARIS",
+      "category": "kpop",
+      "biography": "A songwriter collects short observations while traveling between rehearsals and performances.",
+      "traits": [
+        "Songwriter",
+        "Curious",
+        "Reflective"
+      ]
+    },
+    {
+      "id": "kpop-hero-4",
+      "name": "Haru Seo",
+      "image": "images/anime.jpeg",
+      "series": "SOLARIS",
+      "category": "kpop",
+      "biography": "A multi-instrumentalist adds keyboard and guitar parts during the group acoustic sessions.",
+      "traits": [
+        "Multi-instrumentalist",
+        "Adaptable",
+        "Calm"
+      ]
+    },
+    {
+      "id": "comics-hero-1",
+      "name": "Talia North",
+      "image": "images/dragon-ball.jpg",
+      "series": "The Paper City",
+      "category": "comics",
+      "biography": "An apprentice printmaker discovers that the city old maps leave out a neighborhood that still exists.",
+      "traits": [
+        "Printmaker",
+        "Persistent",
+        "Questioner"
+      ]
+    },
+    {
+      "id": "comics-hero-2",
+      "name": "Owen Pike",
+      "image": "images/my-hero-academia.jpg",
+      "series": "The Paper City",
+      "category": "comics",
+      "biography": "A bicycle messenger knows the back streets and helps Talia reach the people behind the map.",
+      "traits": [
+        "Messenger",
+        "Fast",
+        "Dependable"
+      ]
+    },
+    {
+      "id": "comics-hero-3",
+      "name": "Luz Mercer",
+      "image": "images/dragon-ball.jpg",
+      "series": "The Paper City",
+      "category": "comics",
+      "biography": "A library volunteer preserves hand-drawn posters from the missing neighborhood and looks for their creators.",
+      "traits": [
+        "Archivist",
+        "Resourceful",
+        "Kind"
+      ]
+    },
+    {
+      "id": "comics-hero-4",
+      "name": "Amir Shaw",
+      "image": "images/my-hero-academia.jpg",
+      "series": "The Paper City",
+      "category": "comics",
+      "biography": "A sign painter finds his family shop in an old photograph and joins the search to learn who took it.",
+      "traits": [
+        "Sign painter",
+        "Patient",
+        "Brave"
+      ]
+    },
+    {
+      "id": "manga-hero-1",
+      "name": "Hanae Mori",
+      "image": "images/one-piece.jpeg",
+      "series": "Summer at Kawa Station",
+      "category": "manga",
+      "biography": "A student returning to her seaside hometown documents the station stories commuters tell on rainy days.",
+      "traits": [
+        "Writer",
+        "Thoughtful",
+        "Good listener"
+      ]
+    },
+    {
+      "id": "manga-hero-2",
+      "name": "Ren Ishida",
+      "image": "images/tokyo-ghoul.jpg",
+      "series": "Summer at Kawa Station",
+      "category": "manga",
+      "biography": "A part-time station attendant fixes the old departure board one letter at a time and knows regular passengers by name.",
+      "traits": [
+        "Station attendant",
+        "Helpful",
+        "Handy"
+      ]
+    },
+    {
+      "id": "manga-hero-3",
+      "name": "Saki Watanabe",
+      "image": "images/one-piece.jpeg",
+      "series": "Summer at Kawa Station",
+      "category": "manga",
+      "biography": "A cyclist delivers vegetables from her family garden to nearby shops and always takes the scenic route.",
+      "traits": [
+        "Cyclist",
+        "Cheerful",
+        "Hardworking"
+      ]
+    },
+    {
+      "id": "manga-hero-4",
+      "name": "Kei Tanaka",
+      "image": "images/tokyo-ghoul.jpg",
+      "series": "Summer at Kawa Station",
+      "category": "manga",
+      "biography": "A sketch artist draws the station at different times of day and leaves a copy for anyone in the scene.",
+      "traits": [
+        "Sketch artist",
+        "Quiet",
+        "Observant"
+      ]
+    },
+    {
+      "id": "manga-hero-5",
+      "name": "Mio Fujita",
+      "image": "images/one-piece.jpeg",
+      "series": "Summer at Kawa Station",
+      "category": "manga",
+      "biography": "A visiting student collects local recipes for class. Her interviews help old friends reconnect.",
+      "traits": [
+        "Cook",
+        "Curious",
+        "Connector"
+      ]
+    }
+  ],
+  "eventHighlights": [
+    {
+      "id": "evt-01",
+      "title": "Anime Expo 2026",
+      "date": "July 02 - 05, 2026",
+      "location": "Los Angeles Convention Center",
+      "description": "The largest anime and Japanese pop culture celebration featuring guest voice actors, cosplay contests, and world premieres.",
+      "associatedCategory": "anime",
+      "source": "https://www.anime-expo.org/2026/06/30/anime-expo-2026-returns-with-expansive-programming-and-a-multi-venue-downtown-los-angeles-experience/"
+    },
+    {
+      "id": "evt-02",
+      "title": "Tokyo Game Show 2026",
+      "date": "September 17 - 21, 2026 (September 21 cancelled)",
+      "location": "Makuhari Messe, Chiba, Japan",
+      "description": "The show ran at Makuhari Messe. The final day was cancelled because of severe weather.",
+      "associatedCategory": "gaming",
+      "source": "https://www.gamecity.ne.jp/tgs/en/"
+    },
+    {
+      "id": "evt-03",
+      "title": "Comic-Con International 2026",
+      "date": "July 23 - 26, 2026",
+      "location": "San Diego Convention Center",
+      "description": "The premiere convention for comic books, superhero film reveals, and pop culture panels.",
+      "associatedCategory": "comics",
+      "source": "https://www.comic-con.org/cc/things-to-do/exhibit-hall/"
+    },
+    {
+      "id": "event-anime-1",
+      "title": "Anime Opening Theme Listening Club",
+      "date": "2026-10-10",
+      "location": "Online (proposed community session)",
+      "description": "Compare how music and visuals set the mood in favorite opening sequences.",
+      "associatedCategory": "anime"
+    },
+    {
+      "id": "event-anime-2",
+      "title": "Anime Character Design Sketch Night",
+      "date": "2026-11-11",
+      "location": "Online (proposed community session)",
+      "description": "Bring a sketch or choose a design detail to discuss together.",
+      "associatedCategory": "anime"
+    },
+    {
+      "id": "event-gaming-1",
+      "title": "Co-op Puzzle Game Night",
+      "date": "2026-10-10",
+      "location": "Online (proposed community session)",
+      "description": "Solve a short puzzle game together in a relaxed online session.",
+      "associatedCategory": "gaming"
+    },
+    {
+      "id": "event-gaming-2",
+      "title": "Retro Game High-Score Swap",
+      "date": "2026-11-11",
+      "location": "Online (proposed community session)",
+      "description": "Share a classic game and one route for beating a difficult level.",
+      "associatedCategory": "gaming"
+    },
+    {
+      "id": "event-movies-1",
+      "title": "Spoiler-Free Movie Discussion",
+      "date": "2026-10-10",
+      "location": "Online (proposed community session)",
+      "description": "Talk about a recent watch using a spoiler-free prompt list.",
+      "associatedCategory": "movies"
+    },
+    {
+      "id": "event-movies-2",
+      "title": "How a Scene Is Made",
+      "date": "2026-11-11",
+      "location": "Online (proposed community session)",
+      "description": "Discuss the editing, sound, and camera choices behind one movie scene.",
+      "associatedCategory": "movies"
+    },
+    {
+      "id": "event-movies-3",
+      "title": "Community Short-Film Showcase",
+      "date": "2026-12-12",
+      "location": "Online (proposed community session)",
+      "description": "Share a short film you made or a public-domain short you recommend.",
+      "associatedCategory": "movies"
+    },
+    {
+      "id": "event-tv-shows-1",
+      "title": "Pilot Episode Watch Club",
+      "date": "2026-10-10",
+      "location": "Online (proposed community session)",
+      "description": "Compare the first episode of a series with the story it becomes later.",
+      "associatedCategory": "tv-shows"
+    },
+    {
+      "id": "event-tv-shows-2",
+      "title": "Comfort Show Recommendation Swap",
+      "date": "2026-11-11",
+      "location": "Online (proposed community session)",
+      "description": "Share a series you return to and a good starting episode.",
+      "associatedCategory": "tv-shows"
+    },
+    {
+      "id": "event-tv-shows-3",
+      "title": "Season Finale Discussion",
+      "date": "2026-12-12",
+      "location": "Online (proposed community session)",
+      "description": "Talk through a finale and the questions it leaves open.",
+      "associatedCategory": "tv-shows"
+    },
+    {
+      "id": "event-kpop-1",
+      "title": "K-Pop Choreography Practice",
+      "date": "2026-10-10",
+      "location": "Online (proposed community session)",
+      "description": "Learn a short dance section at your own pace and share practice tips.",
+      "associatedCategory": "kpop"
+    },
+    {
+      "id": "event-kpop-2",
+      "title": "K-Pop Concept Photo Conversation",
+      "date": "2026-11-11",
+      "location": "Online (proposed community session)",
+      "description": "Compare styling and themes from officially released artist photos.",
+      "associatedCategory": "kpop"
+    },
+    {
+      "id": "event-kpop-3",
+      "title": "K-Pop Listening Notes",
+      "date": "2026-12-12",
+      "location": "Online (proposed community session)",
+      "description": "Talk about the instruments, vocals, and arrangement in a chosen track.",
+      "associatedCategory": "kpop"
+    },
+    {
+      "id": "event-comics-1",
+      "title": "Comic Page Reading Circle",
+      "date": "2026-10-10",
+      "location": "Online (proposed community session)",
+      "description": "Discuss how panel order and page layout guide the reader.",
+      "associatedCategory": "comics"
+    },
+    {
+      "id": "event-comics-2",
+      "title": "Independent Comics Showcase",
+      "date": "2026-11-11",
+      "location": "Online (proposed community session)",
+      "description": "Share a comic you made or an independently published title you enjoy.",
+      "associatedCategory": "comics"
+    },
+    {
+      "id": "event-manga-1",
+      "title": "Manga First-Chapter Reading Club",
+      "date": "2026-10-10",
+      "location": "Online (proposed community session)",
+      "description": "Try the first chapter of a series and compare what draws each reader in.",
+      "associatedCategory": "manga"
+    },
+    {
+      "id": "event-manga-2",
+      "title": "Manga Panel and Art Discussion",
+      "date": "2026-11-11",
+      "location": "Online (proposed community session)",
+      "description": "Choose a page and notice how its composition carries the scene.",
+      "associatedCategory": "manga"
+    },
+    {
+      "id": "event-manga-3",
+      "title": "Manga Recommendation Exchange",
+      "date": "2026-12-12",
+      "location": "Online (proposed community session)",
+      "description": "Share a spoiler-free recommendation and who might enjoy it.",
+      "associatedCategory": "manga"
+    }
+  ],
+  "trailersAndMedia": [
+    {
+      "id": "media-01",
+      "title": "Spider-Man: Across the Spider-Verse Trailer",
+      "category": "movies",
+      "contentType": "trailer",
+      "embedUrl": "https://www.youtube.com/embed/cqGjhVJWtEg",
+      "releaseStatus": "recently released",
+      "description": "A featured video from the FandomVerse media collection.",
+      "thumbnail": "images/berserk.jpeg",
+      "views": 100,
+      "date": "2026-09-20"
+    },
+    {
+      "id": "media-02",
+      "title": "Attack on Titan Final Season Official Teaser",
+      "category": "anime",
+      "contentType": "trailer",
+      "embedUrl": "https://www.youtube.com/embed/M_OauHnAFc8",
+      "releaseStatus": "upcoming",
+      "description": "A featured video from the FandomVerse media collection.",
+      "thumbnail": "images/demon-slayer.jpg",
+      "views": 90,
+      "date": "2026-09-20"
+    },
+    {
+      "id": "media-03",
+      "title": "Developer Voice: Interview with RPG Directors",
+      "category": "gaming",
+      "contentType": "interview",
+      "embedUrl": "https://www.youtube.com/embed/P99qJGrPNls",
+      "releaseStatus": "recently released",
+      "description": "A featured video from the FandomVerse media collection.",
+      "thumbnail": "images/hero-image.jpeg",
+      "views": 80,
+      "date": "2026-09-20"
+    },
+    {
+      "id": "media-04",
+      "title": "BTS (방탄소년단) 'Dynamite' Official MV",
+      "category": "kpop",
+      "contentType": "fan content",
+      "embedUrl": "https://www.youtube.com/embed/gdZLi9oWNZg",
+      "releaseStatus": "recently released",
+      "description": "A featured video from the FandomVerse media collection.",
+      "thumbnail": "images/anime.jpeg",
+      "views": 70,
+      "date": "2026-09-20"
+    },
+    {
+      "id": "media-tv-shows-01",
+      "title": "The Final Problem | Official Trailer | Netflix",
+      "category": "tv-shows",
+      "contentType": "trailer",
+      "description": "Netflix trailer for the television series The Final Problem.",
+      "thumbnail": "images/death-note.jpg",
+      "embedUrl": "https://www.youtube.com/embed/yLeja7kWgmU",
+      "releaseStatus": "recently released",
+      "views": 60,
+      "date": "2026-09-01",
+      "source": "https://www.netflix.com/tudum/articles/the-final-problem-trailer"
+    },
+    {
+      "id": "media-comics-01",
+      "title": "DC Next Level | Coming in September 2026",
+      "category": "comics",
+      "contentType": "trailer",
+      "description": "DC preview of its Next Level comic series.",
+      "thumbnail": "images/my-hero-academia.jpg",
+      "embedUrl": "https://www.youtube.com/embed/h0vOz3UOq74",
+      "releaseStatus": "recently released",
+      "views": 60,
+      "date": "2026-09-01",
+      "source": "https://www.dc.com/videos"
+    },
+    {
+      "id": "media-manga-01",
+      "title": "Hirayasumi Anime | Official Teaser Trailer",
+      "category": "manga",
+      "contentType": "trailer",
+      "description": "VIZ Media teaser for the anime adaptation of the Hirayasumi manga.",
+      "thumbnail": "images/one-piece.jpeg",
+      "embedUrl": "https://www.youtube.com/embed/WGdjgzcGZxU",
+      "releaseStatus": "upcoming",
+      "views": 60,
+      "date": "2026-09-01",
+      "source": "https://www.viz.com/press-releases/v/1006758"
+    },
+    {
+      "releaseStatus": "upcoming",
+      "title": "Grand Theft Auto VI | Trailer 2",
+      "source": "https://www.rockstargames.com/VI",
+      "description": "Rockstar Games trailer for Grand Theft Auto VI, currently scheduled for November 19, 2026.",
+      "views": 980000,
+      "contentType": "trailer",
+      "embedUrl": "https://www.youtube.com/embed/VQRLujxTm3c",
+      "category": "gaming",
+      "id": "media-gta-vi-trailer-02",
+      "date": "2025-05-06",
+      "thumbnail": "images/hero-image.jpeg"
+    }
+  ],
+  "merchandiseShowcase": [
+    {
+      "id": "merch-01",
+      "name": "FandomVerse World Map T-Shirt",
+      "image": "images/demon-slayer.jpg",
+      "priceRange": "$25.00 - $35.00",
+      "shortDescription": "Cotton T-shirt concept with an original seven-world map graphic.",
+      "price": 29.99,
+      "category": "anime"
+    },
+    {
+      "id": "merch-02",
+      "name": "Modular Desk Display Figure",
+      "image": "images/hero-image.jpeg",
+      "priceRange": "$59.99 - $79.99",
+      "shortDescription": "Collectible figure concept with interchangeable, non-branded display pieces.",
+      "price": 64.5,
+      "category": "gaming"
+    },
+    {
+      "id": "merch-03",
+      "name": "Cinema Night Desk Mat",
+      "image": "images/berserk.jpeg",
+      "priceRange": "$89.50 - $120.00",
+      "shortDescription": "Wide desk mat concept with a film-reel pattern and stitched edges.",
+      "price": 99,
+      "category": "movies"
+    },
+    {
+      "id": "merch-tv-shows-01",
+      "name": "Episode Night Journal",
+      "image": "images/death-note.jpg",
+      "priceRange": "$20.00 - $40.00",
+      "price": 33.989999999999995,
+      "category": "tv-shows",
+      "shortDescription": "A notebook concept for tracking favorite episodes and spoiler-free notes."
+    },
+    {
+      "id": "merch-kpop-01",
+      "name": "Concert Light Display Stand",
+      "image": "images/anime.jpeg",
+      "priceRange": "$20.00 - $40.00",
+      "price": 36.989999999999995,
+      "category": "kpop",
+      "shortDescription": "A display stand concept for storing a personal light stick between concerts."
+    },
+    {
+      "id": "merch-comics-01",
+      "name": "Comic Panel Bookmark Set",
+      "image": "images/my-hero-academia.jpg",
+      "priceRange": "$20.00 - $40.00",
+      "price": 39.989999999999995,
+      "category": "comics",
+      "shortDescription": "A set of bookmark concepts using original panel patterns and bold colors."
+    },
+    {
+      "id": "merch-manga-01",
+      "name": "Manga Reading Log",
+      "image": "images/one-piece.jpeg",
+      "priceRange": "$20.00 - $40.00",
+      "price": 42.989999999999995,
+      "category": "manga",
+      "shortDescription": "A reading journal concept for volumes, favorite panels, and recommendations."
+    }
+  ],
+  "chatbotDataset": [
+    {
+      "id": "rule-01",
+      "keywords": [
+        "character",
+        "profile",
+        "hero",
+        "who is",
+        "biography"
+      ],
+      "response": "You can explore detailed character profiles with biographies and traits across all 7 categories in our Category Hubs!",
+      "suggestedQuickReplies": [
+        "View Characters",
+        "Explore Anime Hub"
+      ],
+      "targetPage": "category.html"
+    },
+    {
+      "id": "rule-02",
+      "keywords": [
+        "merch",
+        "shop",
+        "t-shirt",
+        "cart",
+        "buy",
+        "price"
+      ],
+      "response": "Check out our Merchandise Showcase to view items, check price ranges, and add products to your temporary cart!",
+      "suggestedQuickReplies": [
+        "Go to Shop",
+        "View Cart"
+      ],
+      "targetPage": "shop.html"
+    },
+    {
+      "id": "rule-03",
+      "keywords": [
+        "event",
+        "expo",
+        "convention",
+        "schedule",
+        "date"
+      ],
+      "response": "We have highlights for past and upcoming events like Anime Expo and Comic-Con with locations and dates.",
+      "suggestedQuickReplies": [
+        "View Events"
+      ],
+      "targetPage": "events.html"
+    },
+    {
+      "id": "rule-anime",
+      "keywords": [
+        "anime"
+      ],
+      "response": "Explore Anime for original sample profiles, image galleries, articles, trailers, and community events.",
+      "suggestedQuickReplies": [
+        "Show anime characters",
+        "Show anime events"
+      ],
+      "targetPage": "category"
+    },
+    {
+      "id": "rule-games",
+      "keywords": [
+        "gaming",
+        "game"
+      ],
+      "response": "The Gaming hub has sample articles, characters, images, media, events, and collectibles.",
+      "suggestedQuickReplies": [
+        "Gaming characters",
+        "Gaming shop"
+      ],
+      "targetPage": "category"
+    },
+    {
+      "id": "rule-trailer",
+      "keywords": [
+        "trailer",
+        "video",
+        "watch"
+      ],
+      "response": "The Trailers page collects video previews across the fandom categories.",
+      "suggestedQuickReplies": [
+        "Show trailers"
+      ],
+      "targetPage": "trailers"
+    },
+    {
+      "id": "rule-about",
+      "keywords": [
+        "about",
+        "who made",
+        "project"
+      ],
+      "response": "FandomVerse is a front-end student project built around seven fandom categories.",
+      "suggestedQuickReplies": [
+        "Contact the team"
+      ],
+      "targetPage": "about"
+    },
+    {
+      "id": "rule-contact",
+      "keywords": [
+        "contact",
+        "message",
+        "team"
+      ],
+      "response": "Use the Contact page to check a message form or open the community map.",
+      "suggestedQuickReplies": [
+        "Open contact"
+      ],
+      "targetPage": "contact"
+    },
+    {
+      "id": "rule-release",
+      "keywords": [
+        "release",
+        "upcoming"
+      ],
+      "response": "Open a category hub and choose Upcoming releases to see the sample release calendar.",
+      "suggestedQuickReplies": [
+        "Browse categories"
+      ],
+      "targetPage": "category"
+    }
+  ],
+  "imageGalleries": [
+    {
+      "images": [
+        {
+          "image": "images/demon-slayer.jpg",
+          "title": "Demon Slayer"
+        },
+        {
+          "image": "images/jujutsu-kaisen.jpg",
+          "title": "Jujutsu Kaisen"
+        },
+        {
+          "image": "images/naruto.jpg",
+          "title": "Naruto"
+        }
+      ],
+      "category": "anime"
+    },
+    {
+      "images": [
+        {
+          "image": "images/hero-image.jpeg",
+          "title": "Gaming showcase"
+        }
+      ],
+      "category": "gaming"
+    },
+    {
+      "images": [
+        {
+          "image": "images/berserk.jpeg",
+          "title": "Berserk"
+        },
+        {
+          "image": "images/attack-on-titan.jpg",
+          "title": "Attack on Titan"
+        }
+      ],
+      "category": "movies"
+    },
+    {
+      "images": [
+        {
+          "image": "images/death-note.jpg",
+          "title": "Death Note"
+        }
+      ],
+      "category": "tv-shows"
+    },
+    {
+      "images": [
+        {
+          "image": "images/anime.jpeg",
+          "title": "K-Pop showcase"
+        }
+      ],
+      "category": "kpop"
+    },
+    {
+      "images": [
+        {
+          "image": "images/my-hero-academia.jpg",
+          "title": "My Hero Academia"
+        },
+        {
+          "image": "images/dragon-ball.jpg",
+          "title": "Dragon Ball"
+        }
+      ],
+      "category": "comics"
+    },
+    {
+      "images": [
+        {
+          "image": "images/one-piece.jpeg",
+          "title": "One Piece"
+        },
+        {
+          "image": "images/tokyo-ghoul.jpg",
+          "title": "Tokyo Ghoul"
+        }
+      ],
+      "category": "manga"
+    }
+  ],
+  "upcomingReleases": [
+    {
+      "id": "release-anime-01",
+      "title": "TOUGEN ANKI: Nikko Kegon Falls Arc",
+      "date": "October 2, 2026",
+      "category": "anime",
+      "description": "The next arc is scheduled to premiere this fall.",
+      "source": "https://www.crunchyroll.com/news/latest/2026/9/19/tougen-anki-nikko-kegon-falls-anime-new-trailer-visual-stream-crunchyroll"
+    },
+    {
+      "id": "release-gaming-01",
+      "title": "Grand Theft Auto VI",
+      "date": "November 19, 2026",
+      "category": "gaming",
+      "description": "The game is currently listed for PlayStation 5 and Xbox Series X|S.",
+      "source": "https://www.rockstargames.com/VI"
+    },
+    {
+      "id": "release-movies-01",
+      "title": "Who Is Martin Mull?",
+      "date": "October 7, 2026",
+      "category": "movies",
+      "description": "A documentary about the musician, comedian, actor, and painter is scheduled for Netflix.",
+      "source": "https://www.netflix.com/tudum/features/new-fall-movies-on-netflix-2026?inapp=true"
+    },
+    {
+      "id": "release-tv-shows-01",
+      "title": "The One About Matthew Perry",
+      "date": "October 27, 2026",
+      "category": "tv-shows",
+      "description": "A three-part documentary series about the Friends actor and his life.",
+      "source": "https://www.netflix.com/tudum/articles/the-one-about-matthew-perry-release-date-news"
+    },
+    {
+      "id": "release-kpop-01",
+      "title": "NMIXX Japan Debut",
+      "date": "December 2026",
+      "category": "kpop",
+      "description": "JYP Entertainment lists the group's official Japan debut in its 2026 outlook.",
+      "source": "https://kind.krx.co.kr/external/dst/irReference/19044/%5BJYP%20ENT%5D%2026Q2_Result_ENG_F.pdf"
+    },
+    {
+      "id": "release-comics-01",
+      "title": "New Titans #38 and The Dakota Incident reprints",
+      "date": "October 14, 2026",
+      "category": "comics",
+      "description": "DC has announced new printings of both books for local comic shops.",
+      "source": "https://www.dc.com/blog/2026-09-10/two-sold-out-comics-featuring-static-return-to-print"
+    },
+    {
+      "id": "release-manga-01",
+      "title": "One Piece Box Set 5: Wano to Egghead",
+      "date": "Fall 2026",
+      "category": "manga",
+      "description": "VIZ announced a collection covering the Wano and Egghead arcs.",
+      "source": "https://www.viz.com/blog/posts/viz-fall-2026-publishing-announcements"
+    }
+  ],
+  "audioClips": [
+    {
+      "id": "audio-fandomverse-theme",
+      "title": "Games Worldbeat",
+      "category": "all",
+      "contentType": "audio",
+      "audioUrl": "audio/mixkit-games-worldbeat-466.mp3",
+      "description": "An adventurous world-inspired instrumental, licensed from Mixkit for use on websites.",
+      "date": "2026-09-25",
+      "sourceUrl": "https://mixkit.co/free-stock-music/world/",
+      "artist": "Bernardo R.",
+      "licenseUrl": "https://mixkit.co/license/"
+    }
+  ]
+}
