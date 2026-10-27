@@ -13,8 +13,13 @@
   <div class="character-grid" id="CharactersGrid" aria-live="polite"></div>
 </section>
 <div class="modal fade" id="characterModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered"><div class="modal-content character-modal">
-    <div class="modal-header"><h2 class="modal-title" id="characterModalTitle">Character</h2><button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
-    <div class="modal-body" id="characterModalBody"></div>
-  </div></div>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content character-modal bg-dark text-white border-secondary">
+      <div class="modal-header border-bottom border-secondary">
+        <h2 class="modal-title text-white fw-bold" id="characterModalTitle">Character</h2>
+        <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-light" id="characterModalBody"></div>
+    </div>
+  </div>
 </div>

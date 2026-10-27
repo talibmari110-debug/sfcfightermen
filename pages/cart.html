@@ -1,6 +1,167 @@
-<section class="page-wrap">
-  <header class="page-heading"><p class="eyebrow">TEMPORARY BASKET</p><h1>Your <span class="purple-text">Cart</span></h1><p>This demo cart calculates a total in your browser. Checkout and payment are not included.</p></header>
-  <div class="cart-list" id="CartList"></div>
-  <div class="cart-total"><span>Total</span><strong id="CartTotal">$0.00</strong></div>
-  <button class="simple-button quiet-button" id="clearCart" type="button">Empty cart</button>
+<section class="page-wrap cart-page-wrap">
+    <header class="page-heading">
+        <p class="eyebrow">FAN MERCHANDISE BASKET</p>
+        <h1>Your <span class="purple-text">Shopping Cart</span></h1>
+        <p>Review your selected collectibles, adjust quantities, and complete your order.</p>
+    </header>
+
+    <!-- Cart Content Container -->
+    <div id="CartMainContent">
+        <div class="row g-4">
+            <!-- Left column: Items List -->
+            <div class="col-12 col-lg-8">
+                <div class="cart-items-container" id="CartList">
+                    <!-- Dynamically populated via JS -->
+                </div>
+                <div class="cart-action-buttons mt-3 d-flex flex-wrap gap-2 justify-content-between align-items-center">
+                    <a href="?page=shop" data-page="shop" class="btn btn-outline-light rounded-pill px-4">
+                        <i class="fa-solid fa-arrow-left me-2"></i>Continue Shopping
+                    </a>
+                    <button class="btn btn-outline-danger rounded-pill px-4" id="clearCart" type="button">
+                        <i class="fa-solid fa-trash me-2"></i>Empty Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right column: Order Summary -->
+            <div class="col-12 col-lg-4">
+                <div class="cart-summary-card">
+                    <h3 class="summary-title"><i class="fa-solid fa-receipt me-2 purple-text"></i>Order Summary</h3>
+                    <div class="summary-line">
+                        <span>Total Items</span>
+                        <strong id="CartItemsCount">0</strong>
+                    </div>
+                    <div class="summary-line">
+                        <span>Subtotal</span>
+                        <strong id="CartSubtotal">$0.00</strong>
+                    </div>
+                    <div class="summary-line">
+                        <span>Shipping</span>
+                        <span class="text-success fw-bold">FREE</span>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-line total-line">
+                        <span>Total Amount</span>
+                        <strong id="CartTotal" class="purple-text">$0.00</strong>
+                    </div>
+                    <button id="btnProceedCheckout" class="btn checkout-btn w-100 mt-4" type="button">
+                        <i class="fa-solid fa-shield-halved me-2"></i>Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order History Section -->
+    <div class="order-history-section mt-5" id="OrderHistorySection">
+        <div class="section-title mb-4">
+            <span class="section-note">YOUR RECENT PURCHASES</span>
+            <h3 class="fw-bold text-white"><i class="fa-solid fa-box-archive me-2 purple-icon"></i>Order <span class="purple-text">History</span></h3>
+            <div class="title-line"></div>
+        </div>
+        <div id="OrderHistoryList" class="row g-3">
+            <!-- Dynamically populated via JS -->
+        </div>
+    </div>
 </section>
+
+<!-- Checkout Modal -->
+<div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-dark text-white border-secondary">
+            <div class="modal-header border-secondary">
+                <h5 class="modal-title fw-bold" id="checkoutModalLabel">
+                    <i class="fa-solid fa-credit-card me-2 purple-text"></i>Checkout & Shipping Information
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="checkoutForm">
+                <div class="modal-body p-4">
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <label for="checkoutName" class="form-label text-muted small fw-bold">Full Name</label>
+                            <input type="text" class="form-control bg-dark text-white border-secondary" id="checkoutName" required>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="checkoutEmail" class="form-label text-muted small fw-bold">Email Address</label>
+                            <input type="email" class="form-control bg-dark text-white border-secondary" id="checkoutEmail" required readonly>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="checkoutPhone" class="form-label text-muted small fw-bold">Phone Number (Pakistani: e.g. 03032259008)</label>
+                            <input
+                                type="tel"
+                                class="form-control bg-dark text-white border-secondary"
+                                id="checkoutPhone"
+                                placeholder="03032259008"
+                                pattern="^(03[0-9]{9}|\+923[0-9]{9}|00923[0-9]{9})$"
+                                title="Please enter a valid Pakistani phone number in format 03032259008 or +923032259008"
+                                required
+                            >
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="checkoutCity" class="form-label text-muted small fw-bold">City / State</label>
+                            <input type="text" class="form-control bg-dark text-white border-secondary" id="checkoutCity" placeholder="Karachi / Lahore / Islamabad" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="checkoutAddress" class="form-label text-muted small fw-bold">Shipping Address</label>
+                            <textarea class="form-control bg-dark text-white border-secondary" id="checkoutAddress" rows="2" placeholder="Street address, house/apartment number..." required></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label text-muted small fw-bold">Payment Method</label>
+                            <div class="payment-options d-flex flex-wrap gap-3">
+                                <div class="form-check payment-check p-3 rounded border border-secondary flex-fill">
+                                    <input class="form-check-input" type="radio" name="checkoutPayment" id="payCOD" value="Cash on Delivery" checked>
+                                    <label class="form-check-label ms-2" for="payCOD">
+                                        <i class="fa-solid fa-money-bill-wave me-1 text-success"></i> Cash on Delivery
+                                    </label>
+                                </div>
+                                <div class="form-check payment-check p-3 rounded border border-secondary flex-fill">
+                                    <input class="form-check-input" type="radio" name="checkoutPayment" id="payCard" value="Credit/Debit Card (Demo)">
+                                    <label class="form-check-label ms-2" for="payCard">
+                                        <i class="fa-solid fa-credit-card me-1 purple-text"></i> Credit/Debit Card
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-4 pt-3 border-top border-secondary">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fs-5">Amount Due:</span>
+                                <span class="fs-4 fw-bold purple-text" id="checkoutModalTotal">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn purple-button px-4 py-2">
+                        <i class="fa-solid fa-check me-2"></i>Confirm & Place Order
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Order Success Modal -->
+<div class="modal fade" id="orderSuccessModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-white border-success text-center p-4">
+            <div class="modal-body">
+                <div class="mb-3 text-success">
+                    <i class="fa-solid fa-circle-check fa-4x"></i>
+                </div>
+                <h3 class="fw-bold mb-2">Order Confirmed!</h3>
+                <p class="text-muted">Thank you for your purchase! Your order has been placed successfully.</p>
+                <div class="p-3 my-3 rounded text-start border border-secondary" style="background:#171324;">
+                    <p class="mb-1"><strong>Order ID:</strong> <span id="successOrderId" class="purple-text fw-bold"></span></p>
+                    <p class="mb-1"><strong>Date:</strong> <span id="successOrderDate"></span></p>
+                    <p class="mb-1"><strong>Total Paid:</strong> <span id="successOrderTotal" class="text-success fw-bold"></span></p>
+                    <p class="mb-0"><strong>Status:</strong> <span class="badge bg-success">Confirmed</span></p>
+                </div>
+                <button type="button" class="btn purple-button w-100 mt-2" data-bs-dismiss="modal">
+                    Close & View Orders
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

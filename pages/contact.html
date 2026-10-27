@@ -1,4 +1,77 @@
 <section class="page-wrap">
-  <header class="page-heading"><p class="eyebrow">WE WOULD LOVE TO HEAR FROM YOU</p><h1>Contact <span class="purple-text">Us</span></h1><p>Questions, ideas, or feedback? Use the form to check your details.</p></header>
-  <div class="row g-4"><div class="col-lg-6"><form class="info-panel contact-form" id="contactForm"><label for="contactName">Your name</label><input id="contactName" name="name" class="form-control" type="text" minlength="3" maxlength="60" pattern="[A-Za-zÀ-ÖØ-öø-ÿ' -]{3,60}" title="Use at least 3 letters. Numbers are not allowed." autocomplete="name" required><label for="contactEmail">Email</label><input id="contactEmail" name="email" type="email" class="form-control" autocomplete="email" required><label for="contactMessage">Message</label><textarea id="contactMessage" name="message" class="form-control" rows="5" required></textarea><button class="simple-button" type="submit">Send message</button></form></div><div class="col-lg-6"><div class="map-panel"><h2>FandomVerse Community</h2><p>Choose a place to view, or share your location only when you press the button.</p><iframe class="map-frame" id="communityMap" title="Map of the FandomVerse community" src="https://maps.google.com/maps?q=Karachi%20Pakistan&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><button class="simple-button" id="findLocation" type="button">Use my location</button><p id="locationReply" class="small-note" aria-live="polite">Your location is not requested until you press the button.</p></div></div></div>
+  <header class="page-heading">
+    <p class="eyebrow">WE WOULD LOVE TO HEAR FROM YOU</p>
+    <h1>Contact <span class="purple-text">Us</span></h1>
+    <p>Questions, ideas, or feedback? Use the form to check your details.</p>
+  </header>
+  <div class="row g-4">
+    <div class="col-lg-6">
+     
+<form class="info-panel contact-form" id="contactForm">
+
+    <!-- Name -->
+   <label for="contactName">Your name</label>
+<input
+    id="contactName"
+    name="name"
+    class="form-control"
+    type="text"
+    minlength="3"
+    maxlength="60"
+    pattern="[A-Za-z ]{3,60}"
+    title="Enter 3–60 characters. Letters, spaces, apostrophes, and hyphens are allowed. Numbers are not allowed."
+    placeholder="Enter your name"
+    autocomplete="name"
+    required
+>
+
+    <!-- Email -->
+    <label for="contactEmail">Email</label>
+    <input
+        id="contactEmail"
+        name="email"
+        type="email"
+        class="form-control"
+        autocomplete="email"
+        maxlength="254"
+        pattern="[a-zA-Z0-9._%+-]+@(?!gmail\.com$)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+        title="Enter a valid email address. Gmail.com addresses are not allowed."
+        placeholder="Enter your email address"
+        required
+    >
+
+    <!-- Message -->
+    <label for="contactMessage">Message</label>
+    <textarea
+        id="contactMessage"
+        name="message"
+        class="form-control"
+        rows="5"
+        minlength="10"
+        maxlength="1000"
+        placeholder="Enter your message (10–1000 characters)"
+        title="Message must contain 10–1000 characters."
+        required
+    ></textarea>
+
+    <!-- Submit Button -->
+    <button class="simple-button" type="submit">
+        Send message
+    </button>
+
+</form>
+
+
+    </div>
+    <div class="col-lg-6">
+      <div class="map-panel">
+        <h2>FandomVerse Community</h2>
+        <p>Choose a place to view, or share your location only when you press the button.</p><iframe class="map-frame"
+          id="communityMap" title="Map of the FandomVerse community"
+          src="https://maps.google.com/maps?q=Karachi%20Pakistan&output=embed" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      
+      </div>
+    </div>
+  </div>
 </section>

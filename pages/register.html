@@ -1,1 +1,81 @@
-<section class="page-wrap narrow-page"><header class="page-heading"><p class="eyebrow">JOIN THE COMMUNITY</p><h1>Create your <span class="purple-text">account</span></h1><p>This front-end example shows a confirmation and does not create or save an account.</p></header><form class="info-panel contact-form" id="demoForm"><label for="registerName">Your name</label><input id="registerName" name="name" class="form-control" type="text" autocomplete="name" required><label for="registerEmail">Email</label><input id="registerEmail" name="email" type="email" class="form-control" autocomplete="email" required><label for="registerPassword">Password</label><input id="registerPassword" name="password" type="password" class="form-control" autocomplete="new-password" required><button class="simple-button" type="submit">Create account</button></form></section>
+
+<section class="page-wrap narrow-page">
+    <header class="page-heading">
+        <p class="eyebrow">JOIN THE COMMUNITY</p>
+        <h1>Create your <span class="purple-text">account</span></h1>
+    </header>
+
+    <div id="registerAlertBox"
+         class="site-auth-alert mb-3"
+         style="display: none;">
+    </div>
+
+    <form class="info-panel contact-form" id="registerForm">
+
+        <!-- Full Name -->
+        <label for="registerName">Full Name</label>
+        <input
+            id="registerName"
+            name="name"
+            class="form-control"
+            type="text"
+            autocomplete="name"
+            minlength="3"
+            maxlength="16"
+            pattern="[A-Za-z]+( [A-Za-z]+)*"
+            title="Full name must contain 3–16 characters using letters and single spaces only."
+            placeholder="e.g. Alex Mercer"
+            required
+        >
+
+        <!-- Email -->
+        <label for="registerEmail" class="mt-3">Email Address</label>
+        <input
+            id="registerEmail"
+            name="email"
+            type="email"
+            class="form-control"
+            autocomplete="email"
+            maxlength="254"
+            placeholder="e.g. user@example.com"
+            required
+        >
+
+        <!-- Strong Password -->
+        <label for="registerPassword" class="mt-3">Password</label>
+        <input
+            id="registerPassword"
+            name="password"
+            type="password"
+            class="form-control"
+            autocomplete="new-password"
+            minlength="8"
+            maxlength="64"
+            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9\s])\S{8,64}"
+            title="Password must be 8–64 characters and contain at least one uppercase letter, one lowercase letter, one number, and one special character. Spaces are not allowed."
+            placeholder="Enter a strong password"
+            required
+        >
+
+        <small class="text-muted d-block mt-1">
+            Password must include uppercase, lowercase, a number, and a special character.
+        </small>
+
+        <!-- Submit Button -->
+        <button class="simple-button mt-3" type="submit">
+            <i class="fa-solid fa-user-plus me-2"></i>
+            Create account
+        </button>
+
+        <!-- Login Link -->
+        <div class="mt-4 text-center">
+            <span class="text-muted">Already registered?</span>
+            <a href="?page=login"
+               data-page="login"
+               class="purple-text fw-bold ms-1">
+                Sign in here
+            </a>
+        </div>
+
+    </form>
+</section>

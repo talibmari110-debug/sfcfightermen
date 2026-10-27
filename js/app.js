@@ -35,6 +35,7 @@ $(function () {
     }
 
     function startPage(page, params) {
+        if (typeof updateAuthUI === "function") updateAuthUI();
         $(".nav-link").removeClass("active");
         if (page === "category") $("#categoryDropdown").addClass("active");
         else $(".nav-link[data-page='" + page + "']").addClass("active");
@@ -44,7 +45,7 @@ $(function () {
             $("#content > section, #content > div").first().prepend('<nav class="bread-crumb" aria-label="Breadcrumb"><a href="?page=home" data-page="home">Home</a><span> / ' + title + '</span></nav>');
         }
         if (page === "home") loadHomeData();
-        if (page === "category") loadCategoryData();
+        if (page === "category") loadCategoryData(params);
         if (page === "articles") loadArticlesPage();
         if (page === "article") loadArticlePage(params.get("id"));
         if (page === "characters") loadCharactersPage();
@@ -58,9 +59,7 @@ $(function () {
         if (page === "about") loadAboutPage();
         if (page === "contact") loadContactPage();
         if (page === "login" || page === "register") loadDemoForm(page);
-        if (page === "category" && params.get("type")) {
-            $("#CategoryPills [data-cat='" + params.get("type") + "']").trigger("click");
-        }
+
     }
 
     $(document).on("click", "a[data-page]", function (event) {
@@ -72,8 +71,11 @@ $(function () {
 
     $(document).on("submit", "#globalSearch", function (event) {
         event.preventDefault();
+        const query = $("#globalSearchInput").val().trim();
         const params = new URLSearchParams();
-        params.set("search", $("#globalSearchInput").val().trim());
+        if (query) {
+            params.set("search", query);
+        }
         loadPage("category", params, true);
     });
 

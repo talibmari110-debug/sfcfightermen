@@ -6,6 +6,7 @@
 // Login and sign up are demo screens only. No account details are saved.
 $(document).ready(function () {
     updateCartCount();
+    if (typeof updateAuthUI === "function") updateAuthUI();
 });
 
 // --- 4. LANDING PAGE DATA LOADER (JSON) ---
@@ -54,9 +55,9 @@ function loadHomeData() {
         // 3. Render Trailers
         if ($("#TrailersListing").length && data.trailersAndMedia) {
             let mediaHtml = "";
-            $.each(data.trailersAndMedia.slice(0, 2), function (i, video) {
+            $.each(data.trailersAndMedia.slice(0, 1), function (i, video) {
                 mediaHtml += `
-                    <div class="col-12 col-md-6">
+                    <div class="col-lg-12 col-md-6">
                         <div class="ratio ratio-16x9 rounded overflow-hidden">
                             <iframe src="${video.embedUrl}" title="${video.title}" loading="lazy" allowfullscreen></iframe>
                         </div>
@@ -152,8 +153,21 @@ $(document).ready(function () {
 
 // --- 5. CART COUNT SHOWN IN THE SHARED MENU ---
 function updateCartCount() {
-    let cart = JSON.parse(localStorage.getItem("fandom_cart") || "[]");
-    $("#cartCount").text(cart.length);
+    let cart = [];
+    try {
+        let raw = JSON.parse(localStorage.getItem("fandom_cart") || "[]");
+        if (Array.isArray(raw)) cart = raw;
+    } catch (e) {
+        cart = [];
+    }
+    let totalQty = cart.reduce(function (sum, item) {
+        if (typeof item === "object" && item !== null && item.quantity) {
+            return sum + (Number(item.quantity) || 1);
+        }
+        return sum + 1;
+    }, 0);
+    $("#cartCount").text(totalQty);
+    $("#shopCartCount").text(totalQty);
 }
 
 // --- 6. VISITOR COUNT, CURRENT DATE, AND TIME ---
@@ -189,118 +203,6 @@ $(document).ready(function () {
         $("#chatOpen").trigger("click");
     });
 });
-
-/* ==========================================================================
-   FandomVerse - Category Loader
-   ========================================================================== */
-
-function loadCategoryData() {
-    console.log("Loading Category Page Data...");
-
-    // Get selected category from URL parameters (e.g., ?type=anime)
-    const urlParams = new URLSearchParams(window.location.search);
-    const selectedCat = urlParams.get('type') || "all";
-
-    // Set page header
-    let displayTitle = selectedCat === "all" ? "All Fandoms" : selectedCat.toUpperCase();
-    $("#CategoryTitle").html(`${displayTitle} <span class="text-purple">Hub</span>`);
-
-    // Highlight corresponding filter pill button if it exists
-    $("#CategoryPills button").removeClass("active");
-    $(`#CategoryPills button[data-cat="${selectedCat}"]`).addClass("active");
-
-    // Fetch JSON Dataset
-    $.getJSON("data.json", function (data) {
-        console.log("JSON loaded for category view:", data);
-
-        let cards = data.contentCards || data.content || [];
-        let characters = data.characterProfiles || data.characters || [];
-
-        // 1. Render Filtered Content Cards
-        renderCategoryCards(cards, selectedCat);
-
-        // 2. Render Filtered Characters
-        renderCategoryCharacters(characters, selectedCat);
-
-        // 3. Attach Filter Listeners
-        $("#CategoryPills button").off("click").on("click", function () {
-            $("#CategoryPills button").removeClass("active");
-            $(this).addClass("active");
-
-            let cat = $(this).attr("data-cat");
-            renderCategoryCards(cards, cat);
-            renderCategoryCharacters(characters, cat);
-        });
-
-    }).fail(function (jqXHR, textStatus, error) {
-        console.error("Failed to load data.json:", textStatus, error);
-        $("#CategoryListingGrid").html('<p class="text-danger">Unable to load data.json. Make sure you are running Live Server.</p>');
-    });
-}
-
-function renderCategoryCards(cards, category) {
-    let filtered = cards;
-    if (category !== "all") {
-        filtered = cards.filter(item => item.category === category);
-    }
-
-    if (filtered.length === 0) {
-        $("#CategoryListingGrid").html('<div class="col-12 text-center py-4"><p class="text-muted">No content available for this category.</p></div>');
-        return;
-    }
-
-    let html = "";
-    $.each(filtered, function (i, item) {
-        let img = item.thumbnail || item.image || "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&q=80";
-        html += `
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card bg-dark text-white border-secondary h-100">
-                    <img src="${img}" class="card-img-top" style="height:200px; object-fit:cover;">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <div>
-                            <span class="badge bg-secondary mb-2">${(item.category || "GENERAL").toUpperCase()}</span>
-                            <h5 class="fw-bold">${item.title}</h5>
-                            <p class="small text-muted">${item.shortDescription || ""}</p>
-                        </div>
-                        <button data-save-home="${item.id}" data-title="${item.title}" class="btn btn-sm btn-outline-light mt-3">
-                            <i class="fa-regular fa-bookmark me-1"></i> Bookmark
-                        </button>
-                    </div>
-                </div>
-            </div>`;
-    });
-
-    $("#CategoryListingGrid").html(html);
-}
-
-function renderCategoryCharacters(characters, category) {
-    let filtered = characters;
-    if (category !== "all") {
-        filtered = characters.filter(char => char.category === category);
-    }
-
-    if (filtered.length === 0) {
-        $("#CharacterListingGrid").html('<div class="col-12 text-center py-4"><p class="text-muted">No characters available for this category.</p></div>');
-        return;
-    }
-
-    let html = "";
-    $.each(filtered, function (i, char) {
-        html += `
-            <div class="col-6 col-md-3">
-                <div class="card bg-dark text-white border-secondary text-center p-3 h-100">
-                    <img src="${char.image}" class="rounded-circle mx-auto mb-2" style="width: 90px; height: 90px; object-fit: cover; border: 2px solid #b026ff;">
-                    <h6 class="fw-bold m-0">${char.name}</h6>
-                    <small class="text-purple">${char.series || char.franchise}</small>
-                </div>
-            </div>`;
-    });
-
-    $("#CharacterListingGrid").html(html);
-}
-
-
-
 
 // Trailer Page Logics
 
@@ -504,7 +406,7 @@ function renderTrailersGrid() {
                             <button onclick="playTrailerModal('${embedUrl}', '${title}', '${cat}')" class="btn btn-sm btn-outline-light rounded-pill">
                                 Watch Preview
                             </button>
-                            <button data-save-media="${item.id}" data-title="${title}" class="btn btn-sm btn-outline-light rounded-circle">
+                            <button data-save-media="${item.id}" data-title="${title}" class="trailer-bookmark-btn" title="Save to bookmarks" aria-label="Save to bookmarks">
                                 <i class="fa-regular fa-bookmark"></i>
                             </button>
                         </div>
