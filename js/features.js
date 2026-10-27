@@ -104,8 +104,7 @@ function updateAuthUI() {
 $(document).on("click", "#logoutBtn", function () {
     localStorage.removeItem("fandom_currentUser");
     updateAuthUI();
-    showSiteAlert("Logged out successfully.");
-    alert("You have logged out successfully.");
+    if (typeof FandomAlert !== "undefined") { FandomAlert.success("Logged Out", "You have been logged out successfully."); } else { showSiteAlert("Logged out successfully."); }
     const params = new URLSearchParams(window.location.search);
     if (params.get("page") === "cart") {
         loadCartPage();
@@ -118,7 +117,7 @@ function addBookmark(id, title, kind) {
         saved.push({ id: id, title: title, kind: kind || "content" });
         localStorage.setItem("fandom_bookmarks", JSON.stringify(saved));
     }
-    alert("Saved in your Bookmarks.");
+    if (typeof FandomAlert !== "undefined") { FandomAlert.toast("Saved to your Bookmarks!", "success"); } else { alert("Saved in your Bookmarks."); }
 }
 
 function showDetail(title, description, image, extra) {
@@ -633,8 +632,7 @@ function addToCart(id, qty = 1) {
     // ISSUE 3: Add to cart runs ONLY when user is logged in
     const user = getCurrentUser();
     if (!user) {
-        showSiteAlert("Please login first to add items to your cart!");
-        alert("Please login first to add items to your cart!");
+        if (typeof FandomAlert !== "undefined") { FandomAlert.warning("Login Required", "Please sign in or register to add items to your cart!"); } else { alert("Please login first to add items to your cart!"); }
         return false;
     }
 
@@ -660,7 +658,14 @@ function changeCartQuantity(id, delta) {
     const currentQty = Number(item.quantity) || 1;
     const targetQty = currentQty + delta;
     if (targetQty <= 0) {
-        if (confirm("Remove this item from your cart?")) {
+        if (typeof FandomAlert !== "undefined") {
+            FandomAlert.confirm("Remove Item?", "Do you want to remove this item from your cart?", "Yes, remove", "Keep item")
+                .then(function (confirmed) {
+                    if (confirmed) {
+                        removeCartItem(id);
+                    }
+                });
+        } else if (confirm("Remove this item from your cart?")) {
             removeCartItem(id);
         }
     } else {
@@ -710,6 +715,7 @@ function saveOrders(orders) {
 }
 
 function showSiteAlert(message) {
+    if (typeof FandomAlert !== "undefined" && FandomAlert.toast) { FandomAlert.toast(message, "info"); }
     const notice = $("#siteAlert");
     if (!notice.length) return;
     window.clearTimeout(window.siteAlertTimer);
@@ -791,14 +797,13 @@ function loadCartPage() {
         $("#btnProceedCheckout").off("click").on("click", function () {
             const currentUser = getCurrentUser();
             if (!currentUser) {
-                alert("Please sign in or register to complete your order!");
-                window.location.href = "?page=login";
+                if (typeof FandomAlert !== "undefined") { FandomAlert.warning("Sign In Required", "Please sign in or register to complete your order!").then(function () { window.location.href = "?page=login"; }); } else { alert("Please sign in or register to complete your order!"); window.location.href = "?page=login"; }
                 return;
             }
 
             const currentCart = getCart();
             if (!currentCart.length) {
-                alert("Your cart is empty! Add merchandise items before checking out.");
+                if (typeof FandomAlert !== "undefined") { FandomAlert.info("Cart is Empty", "Add merchandise items before checking out."); } else { alert("Your cart is empty! Add merchandise items before checking out."); }
                 return;
             }
 
@@ -820,13 +825,13 @@ function loadCartPage() {
 
             const currentUser = getCurrentUser();
             if (!currentUser) {
-                alert("Please login first to complete your checkout.");
+                if (typeof FandomAlert !== "undefined") { FandomAlert.warning("Login Required", "Please login first to complete your checkout."); } else { alert("Please login first to complete your checkout."); }
                 return;
             }
 
             const currentCart = getCart();
             if (!currentCart.length) {
-                alert("Your cart is empty.");
+                if (typeof FandomAlert !== "undefined") { FandomAlert.info("Cart is Empty", "Your shopping cart is currently empty."); } else { alert("Your cart is empty."); }
                 return;
             }
 
@@ -838,14 +843,14 @@ function loadCartPage() {
             const payment = $('input[name="checkoutPayment"]:checked').val() || "Cash on Delivery";
 
             if (!name || !email || !phone || !address) {
-                alert("Please complete all shipping address fields.");
+                if (typeof FandomAlert !== "undefined") { FandomAlert.warning("Incomplete Information", "Please complete all shipping address fields."); } else { alert("Please complete all shipping address fields."); }
                 return;
             }
 
             const pakistaniPhoneRegex = /^(03[0-9]{9}|\+923[0-9]{9}|00923[0-9]{9})$/;
             const cleanPhone = phone.replace(/[\s-]/g, '');
             if (!pakistaniPhoneRegex.test(cleanPhone)) {
-                alert("Please enter a valid Pakistani phone number in format 03032259008.");
+                if (typeof FandomAlert !== "undefined") { FandomAlert.error("Invalid Phone Number", "Please enter a valid Pakistani phone number in format 03032259008."); } else { alert("Please enter a valid Pakistani phone number in format 03032259008."); }
                 $("#checkoutPhone").focus();
                 return;
             }
@@ -922,7 +927,16 @@ function loadCartPage() {
 
         // Clear cart button
         $("#clearCart").off("click").on("click", function () {
-            if (confirm("Are you sure you want to empty your shopping cart?")) {
+            if (typeof FandomAlert !== "undefined") {
+                FandomAlert.confirm("Empty Shopping Cart?", "Are you sure you want to empty your entire shopping cart?", "Yes, clear cart", "Cancel")
+                    .then(function (confirmed) {
+                        if (confirmed) {
+                            saveCart([]);
+                            loadCartPage();
+                            FandomAlert.toast("Cart cleared", "info");
+                        }
+                    });
+            } else if (confirm("Are you sure you want to empty your shopping cart?")) {
                 saveCart([]);
                 loadCartPage();
                 showSiteAlert("Cart cleared.");
@@ -1037,7 +1051,7 @@ function loadAboutPage() { $("#visitorTotal").text(localStorage.getItem("visitor
 function loadContactPage() {
     $("#contactForm").off("submit").on("submit", function (event) {
         event.preventDefault();
-        alert("We will contact you soon.");
+        if (typeof FandomAlert !== "undefined") { FandomAlert.success("Message Received", "Thank you for reaching out! We will contact you soon."); } else { alert("We will contact you soon."); }
         this.reset();
     });
     $("#findLocation").off("click").on("click", function () {
@@ -1072,7 +1086,7 @@ function loadAuthPage(page) {
                 if (alertBox.length) {
                     alertBox.attr("class", "site-auth-alert alert-danger").text("Please fill in all required fields.").show();
                 } else {
-                    alert("Please fill in all required fields.");
+                    if (typeof FandomAlert !== "undefined") { FandomAlert.warning("Required Fields", "Please fill in all required fields."); } else { alert("Please fill in all required fields."); }
                 }
                 return;
             }
@@ -1081,7 +1095,7 @@ function loadAuthPage(page) {
                 if (alertBox.length) {
                     alertBox.attr("class", "site-auth-alert alert-danger").text("Password must be at least 6 characters.").show();
                 } else {
-                    alert("Password must be at least 6 characters.");
+                    if (typeof FandomAlert !== "undefined") { FandomAlert.warning("Weak Password", "Password must be at least 6 characters."); } else { alert("Password must be at least 6 characters."); }
                 }
                 return;
             }
@@ -1093,7 +1107,7 @@ function loadAuthPage(page) {
                 if (alertBox.length) {
                     alertBox.attr("class", "site-auth-alert alert-danger").text(msg).show();
                 }
-                alert(msg);
+                if (typeof FandomAlert !== "undefined") { FandomAlert.error("Account Exists", msg); } else { alert(msg); }
                 return;
             }
 
@@ -1113,7 +1127,7 @@ function loadAuthPage(page) {
             if (alertBox.length) {
                 alertBox.attr("class", "site-auth-alert alert-success").text(welcomeMsg).show();
             }
-            alert(welcomeMsg);
+            if (typeof FandomAlert !== "undefined") { FandomAlert.success("Welcome!", welcomeMsg); } else { alert(welcomeMsg); }
             showSiteAlert("Welcome, " + newUser.name + "!");
 
             // Navigate to home page
@@ -1132,7 +1146,7 @@ function loadAuthPage(page) {
                 if (alertBox.length) {
                     alertBox.attr("class", "site-auth-alert alert-danger").text("Please enter both email and password.").show();
                 } else {
-                    alert("Please enter both email and password.");
+                    if (typeof FandomAlert !== "undefined") { FandomAlert.warning("Required Fields", "Please enter both email and password."); } else { alert("Please enter both email and password."); }
                 }
                 return;
             }
@@ -1145,7 +1159,7 @@ function loadAuthPage(page) {
                 if (alertBox.length) {
                     alertBox.attr("class", "site-auth-alert alert-danger").text(noUserMsg).show();
                 }
-                alert(noUserMsg);
+                if (typeof FandomAlert !== "undefined") { FandomAlert.error("User Not Found", noUserMsg); } else { alert(noUserMsg); }
                 return;
             }
 
@@ -1154,7 +1168,7 @@ function loadAuthPage(page) {
                 if (alertBox.length) {
                     alertBox.attr("class", "site-auth-alert alert-danger").text(wrongPassMsg).show();
                 }
-                alert(wrongPassMsg);
+                if (typeof FandomAlert !== "undefined") { FandomAlert.error("Incorrect Password", wrongPassMsg); } else { alert(wrongPassMsg); }
                 return;
             }
 
@@ -1163,7 +1177,7 @@ function loadAuthPage(page) {
             if (alertBox.length) {
                 alertBox.attr("class", "site-auth-alert alert-success").text(loginSuccessMsg).show();
             }
-            alert(loginSuccessMsg);
+            if (typeof FandomAlert !== "undefined") { FandomAlert.success("Login Successful", loginSuccessMsg); } else { alert(loginSuccessMsg); }
             showSiteAlert("Welcome back, " + user.name + "!");
 
             // Navigate to home page
@@ -1225,7 +1239,7 @@ $(function () {
     $(document).on("submit", "#chatForm", function (event) { event.preventDefault(); const question = $("#chatInput").val().trim(); if (!question) return; addChatMessage(question, "chat-question"); $("#chatInput").val(""); answerChat(question); });
     $(document).on("click", "[data-question]", function () { const question = $(this).data("question"); addChatMessage(question, "chat-question"); answerChat(question); });
     $(document).on("click", "#btnModalWatchlist", function () { addBookmark("media-" + Date.now(), $(this).data("video-title") || "Featured video", "media"); });
-    $(document).on("submit", ".newsletter-form", function (event) { event.preventDefault(); alert("Thanks for joining the sample newsletter. This demo does not save email addresses."); this.reset(); });
+    $(document).on("submit", ".newsletter-form", function (event) { event.preventDefault(); if (typeof FandomAlert !== "undefined") { FandomAlert.success("Subscribed!", "Thanks for joining the newsletter!"); } else { alert("Thanks for joining the newsletter!"); } this.reset(); });
     $(document).on("click", "[data-save-home]", function () { addBookmark($(this).data("save-home"), $(this).data("title"), "content"); });
     $(document).on("click", "[data-save-media]", function () { addBookmark($(this).data("save-media"), $(this).data("title"), "media"); });
     $(document).on("click", ".nav-link[data-page]", function () { $(".nav-link").removeClass("active"); $(this).addClass("active"); });

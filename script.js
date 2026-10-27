@@ -420,7 +420,7 @@ function renderTrailersGrid() {
 
 function playTrailerModal(embedUrl, title, category) {
     if (!embedUrl) {
-        alert("Video URL not available.");
+        if (typeof FandomAlert !== "undefined") { FandomAlert.warning("Video Unavailable", "The video URL for this trailer is currently not available."); } else { alert("Video URL not available."); }
         return;
     }
 
