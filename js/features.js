@@ -112,12 +112,27 @@ $(document).on("click", "#logoutBtn", function () {
 });
 
 function addBookmark(id, title, kind) {
+    const user = getCurrentUser();
+    if (!user) {
+        if (typeof FandomAlert !== "undefined" && FandomAlert.authRequired) {
+            FandomAlert.authRequired("Login Required", "Please sign in or register to save bookmarks!");
+        } else {
+            window.location.href = "?page=login";
+        }
+        return false;
+    }
+
     const saved = getSavedList("fandom_bookmarks");
     if (!saved.some(function (item) { return item.id === id; })) {
         saved.push({ id: id, title: title, kind: kind || "content" });
         localStorage.setItem("fandom_bookmarks", JSON.stringify(saved));
     }
-    if (typeof FandomAlert !== "undefined") { FandomAlert.toast("Saved to your Bookmarks!", "success"); } else { alert("Saved in your Bookmarks."); }
+    if (typeof FandomAlert !== "undefined") {
+        FandomAlert.toast("Saved to your Bookmarks!", "success");
+    } else {
+        alert("Saved in your Bookmarks.");
+    }
+    return true;
 }
 
 function showDetail(title, description, image, extra) {
@@ -552,7 +567,9 @@ function loadEventsPage() {
     }
     $("#eventCategory").off("change").on("change", render);
     $(document).off("click", "[data-save-event]").on("click", "[data-save-event]", function () { addBookmark($(this).data("save-event"), $(this).data("title"), "event"); });
-    render();
+        render();
+
+
 }
 
 function loadShopPage() {
@@ -632,7 +649,11 @@ function addToCart(id, qty = 1) {
     // ISSUE 3: Add to cart runs ONLY when user is logged in
     const user = getCurrentUser();
     if (!user) {
-        if (typeof FandomAlert !== "undefined") { FandomAlert.warning("Login Required", "Please sign in or register to add items to your cart!"); } else { alert("Please login first to add items to your cart!"); }
+        if (typeof FandomAlert !== "undefined" && FandomAlert.authRequired) {
+            FandomAlert.authRequired("Login Required", "Please sign in or register to add items to your cart!");
+        } else {
+            window.location.href = "?page=login";
+        }
         return false;
     }
 
@@ -645,7 +666,12 @@ function addToCart(id, qty = 1) {
     }
 
     saveCart(cart);
-    showSiteAlert("Item added to your cart!");
+    // ISSUE 5: Single alert message only - do not fire both toast and DOM banner
+    if (typeof FandomAlert !== "undefined" && FandomAlert.toast) {
+        FandomAlert.toast("Item added to your cart!", "success");
+    } else {
+        showSiteAlert("Item added to your cart!", "success");
+    }
     return true;
 }
 window.addToCart = addToCart;
@@ -714,8 +740,12 @@ function saveOrders(orders) {
     localStorage.setItem("fandom_orders", JSON.stringify(orders));
 }
 
-function showSiteAlert(message) {
-    if (typeof FandomAlert !== "undefined" && FandomAlert.toast) { FandomAlert.toast(message, "info"); }
+function showSiteAlert(message, type = "success") {
+    // ISSUE 5: Prevent double alert - return immediately once toast is shown
+    if (typeof FandomAlert !== "undefined" && FandomAlert.toast) {
+        FandomAlert.toast(message, type);
+        return;
+    }
     const notice = $("#siteAlert");
     if (!notice.length) return;
     window.clearTimeout(window.siteAlertTimer);
@@ -793,17 +823,28 @@ function loadCartPage() {
             $("#btnProceedCheckout").prop("disabled", false).removeClass("opacity-50");
         }
 
-        // Checkout button click
+        // Checkout button click (Issue 1: Credit/Debit Card Fields & Amount)
         $("#btnProceedCheckout").off("click").on("click", function () {
             const currentUser = getCurrentUser();
             if (!currentUser) {
-                if (typeof FandomAlert !== "undefined") { FandomAlert.warning("Sign In Required", "Please sign in or register to complete your order!").then(function () { window.location.href = "?page=login"; }); } else { alert("Please sign in or register to complete your order!"); window.location.href = "?page=login"; }
+                if (typeof FandomAlert !== "undefined") {
+                    FandomAlert.warning("Sign In Required", "Please sign in or register to complete your order!").then(function () {
+                        window.location.href = "?page=login";
+                    });
+                } else {
+                    alert("Please sign in or register to complete your order!");
+                    window.location.href = "?page=login";
+                }
                 return;
             }
 
             const currentCart = getCart();
             if (!currentCart.length) {
-                if (typeof FandomAlert !== "undefined") { FandomAlert.info("Cart is Empty", "Add merchandise items before checking out."); } else { alert("Your cart is empty! Add merchandise items before checking out."); }
+                if (typeof FandomAlert !== "undefined") {
+                    FandomAlert.info("Cart is Empty", "Add merchandise items before checking out.");
+                } else {
+                    alert("Your cart is empty! Add merchandise items before checking out.");
+                }
                 return;
             }
 
@@ -811,6 +852,44 @@ function loadCartPage() {
             $("#checkoutName").val(currentUser.name || "");
             $("#checkoutEmail").val(currentUser.email || "");
             $("#checkoutModalTotal").text("$" + subtotal.toFixed(2));
+            $("#checkoutCardAmount").val(subtotal.toFixed(2));
+
+            // Dynamic card payment fields visibility based on checked radio
+            function updatePaymentFieldsVisibility() {
+                const selectedMethod = $('input[name="checkoutPayment"]:checked').val();
+                if (selectedMethod === "Credit/Debit Card") {
+                    $("#cardPaymentFields").slideDown(200);
+                    $("#checkoutCardNumber").prop("required", true);
+                    $("#checkoutCardAmount").prop("required", true);
+                    if (!$("#checkoutCardAmount").val() || parseFloat($("#checkoutCardAmount").val()) === 0) {
+                        $("#checkoutCardAmount").val(subtotal.toFixed(2));
+                    }
+                } else {
+                    $("#cardPaymentFields").slideUp(200);
+                    $("#checkoutCardNumber").prop("required", false);
+                    $("#checkoutCardAmount").prop("required", false);
+                }
+            }
+
+            $('input[name="checkoutPayment"]').off("change").on("change", updatePaymentFieldsVisibility);
+            updatePaymentFieldsVisibility();
+
+            // Auto-format card number as 4-4-4-4
+            $("#checkoutCardNumber").off("input").on("input", function () {
+                let raw = $(this).val().replace(/\D/g, "").substring(0, 16);
+                let parts = raw.match(/.{1,4}/g);
+                $(this).val(parts ? parts.join(" ") : raw);
+            });
+
+            // Auto-format expiry as MM/YY
+            $("#checkoutCardExpiry").off("input").on("input", function () {
+                let raw = $(this).val().replace(/\D/g, "").substring(0, 4);
+                if (raw.length >= 3) {
+                    $(this).val(raw.substring(0, 2) + "/" + raw.substring(2));
+                } else {
+                    $(this).val(raw);
+                }
+            });
 
             const checkoutModalEl = document.getElementById("checkoutModal");
             if (checkoutModalEl) {
@@ -825,13 +904,21 @@ function loadCartPage() {
 
             const currentUser = getCurrentUser();
             if (!currentUser) {
-                if (typeof FandomAlert !== "undefined") { FandomAlert.warning("Login Required", "Please login first to complete your checkout."); } else { alert("Please login first to complete your checkout."); }
+                if (typeof FandomAlert !== "undefined") {
+                    FandomAlert.warning("Login Required", "Please login first to complete your checkout.");
+                } else {
+                    alert("Please login first to complete your checkout.");
+                }
                 return;
             }
 
             const currentCart = getCart();
             if (!currentCart.length) {
-                if (typeof FandomAlert !== "undefined") { FandomAlert.info("Cart is Empty", "Your shopping cart is currently empty."); } else { alert("Your cart is empty."); }
+                if (typeof FandomAlert !== "undefined") {
+                    FandomAlert.info("Cart is Empty", "Your shopping cart is currently empty.");
+                } else {
+                    alert("Your cart is empty.");
+                }
                 return;
             }
 
@@ -843,16 +930,65 @@ function loadCartPage() {
             const payment = $('input[name="checkoutPayment"]:checked').val() || "Cash on Delivery";
 
             if (!name || !email || !phone || !address) {
-                if (typeof FandomAlert !== "undefined") { FandomAlert.warning("Incomplete Information", "Please complete all shipping address fields."); } else { alert("Please complete all shipping address fields."); }
+                if (typeof FandomAlert !== "undefined") {
+                    FandomAlert.warning("Incomplete Information", "Please complete all shipping address fields.");
+                } else {
+                    alert("Please complete all shipping address fields.");
+                }
                 return;
             }
 
             const pakistaniPhoneRegex = /^(03[0-9]{9}|\+923[0-9]{9}|00923[0-9]{9})$/;
             const cleanPhone = phone.replace(/[\s-]/g, '');
             if (!pakistaniPhoneRegex.test(cleanPhone)) {
-                if (typeof FandomAlert !== "undefined") { FandomAlert.error("Invalid Phone Number", "Please enter a valid Pakistani phone number in format 03032259008."); } else { alert("Please enter a valid Pakistani phone number in format 03032259008."); }
+                if (typeof FandomAlert !== "undefined") {
+                    FandomAlert.error("Invalid Phone Number", "Please enter a valid Pakistani phone number in format 03032259008.");
+                } else {
+                    alert("Please enter a valid Pakistani phone number in format 03032259008.");
+                }
                 $("#checkoutPhone").focus();
                 return;
+            }
+
+            let cardNo = "";
+            let cardAmount = 0;
+            let maskedCard = "";
+
+            if (payment === "Credit/Debit Card") {
+                cardNo = ($("#checkoutCardNumber").val() || "").replace(/\s+/g, "");
+                cardAmount = parseFloat($("#checkoutCardAmount").val()) || 0;
+
+                if (!cardNo || cardNo.length < 13 || cardNo.length > 19) {
+                    if (typeof FandomAlert !== "undefined") {
+                        FandomAlert.error("Invalid Card Number", "Please enter a valid 16-digit Credit or Debit Card number.");
+                    } else {
+                        alert("Please enter a valid 16-digit Credit or Debit Card number.");
+                    }
+                    $("#checkoutCardNumber").focus();
+                    return;
+                }
+
+                if (!cardAmount || cardAmount <= 0) {
+                    if (typeof FandomAlert !== "undefined") {
+                        FandomAlert.error("Invalid Amount", "Please enter a valid payment amount.");
+                    } else {
+                        alert("Please enter a valid payment amount.");
+                    }
+                    $("#checkoutCardAmount").focus();
+                    return;
+                }
+
+                if (cardAmount < subtotal) {
+                    if (typeof FandomAlert !== "undefined") {
+                        FandomAlert.error("Insufficient Amount", "Card payment amount ($" + cardAmount.toFixed(2) + ") cannot be less than the order total ($" + subtotal.toFixed(2) + ").");
+                    } else {
+                        alert("Card payment amount cannot be less than the order total.");
+                    }
+                    $("#checkoutCardAmount").focus();
+                    return;
+                }
+
+                maskedCard = "**** **** **** " + cardNo.slice(-4);
             }
 
             const orderItems = [];
@@ -888,6 +1024,8 @@ function loadCartPage() {
                 city: city,
                 address: address,
                 paymentMethod: payment,
+                cardNumber: maskedCard,
+                paidAmount: (payment === "Credit/Debit Card" ? cardAmount.toFixed(2) : orderTotal.toFixed(2)),
                 items: orderItems,
                 totalAmount: orderTotal.toFixed(2),
                 orderDate: orderDate,
@@ -913,7 +1051,8 @@ function loadCartPage() {
             // Show success modal
             $("#successOrderId").text(orderId);
             $("#successOrderDate").text(orderDate);
-            $("#successOrderTotal").text("$" + orderTotal.toFixed(2));
+            $("#successOrderPayment").text(payment === "Credit/Debit Card" ? "Credit/Debit Card (" + maskedCard + ")" : "Cash on Delivery");
+            $("#successOrderTotal").text("$" + (payment === "Credit/Debit Card" ? cardAmount.toFixed(2) : orderTotal.toFixed(2)));
 
             const succModalEl = document.getElementById("orderSuccessModal");
             if (succModalEl) {
@@ -921,10 +1060,13 @@ function loadCartPage() {
                 succModal.show();
             }
 
-            showSiteAlert("Order #" + orderId + " placed successfully!");
+            if (typeof FandomAlert !== "undefined" && FandomAlert.toast) {
+                FandomAlert.toast("Order #" + orderId + " placed successfully!", "success");
+            } else {
+                showSiteAlert("Order #" + orderId + " placed successfully!");
+            }
             loadCartPage();
         });
-
         // Clear cart button
         $("#clearCart").off("click").on("click", function () {
             if (typeof FandomAlert !== "undefined") {
@@ -996,7 +1138,7 @@ function renderOrderHistory() {
                     <p class="small text-light mb-1"><strong>Items:</strong> ${itemsSummary}</p>
                     <p class="small text-muted mb-2"><strong>Ship to:</strong> ${safeText(order.address)}, ${safeText(order.city || "")} (${safeText(order.phone)})</p>
                     <div class="d-flex justify-content-between align-items-center pt-2 border-top border-secondary">
-                        <small class="text-muted">${safeText(order.paymentMethod)}</small>
+                        <small class="text-muted">${safeText(order.paymentMethod)}${order.cardNumber ? " <span class='purple-text fw-bold'>(" + safeText(order.cardNumber) + ")</span>" : ""}</small>
                         <strong class="text-white fs-5">$${safeText(order.totalAmount)}</strong>
                     </div>
                 </div>
@@ -1007,6 +1149,23 @@ function renderOrderHistory() {
 }
 
 function loadBookmarksPage() {
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+        $("#BookmarksGrid").html(`
+            <div class="col-12 text-center py-5">
+                <div class="empty-story p-5 rounded" style="background: rgba(18, 20, 36, 0.95); border: 1px solid rgba(161, 0, 255, 0.3);">
+                    <i class="fa-regular fa-bookmark fs-1 text-purple mb-3 d-block"></i>
+                    <h2 class="text-white fw-bold mb-2">Sign in to view your bookmarks</h2>
+                    <p class="text-muted mb-4">Your saved articles, characters, trailers, and releases are saved to your fan account.</p>
+                    <a class="simple-button" href="?page=login" data-page="login">
+                        <i class="fa-solid fa-right-to-bracket me-2"></i>Sign in now
+                    </a>
+                </div>
+            </div>
+        `);
+        return;
+    }
+
     $.getJSON("data.json", function (data) {
         const galleryItems = [];
         (data.imageGalleries || []).forEach(function (gallery) {
@@ -1014,36 +1173,127 @@ function loadBookmarksPage() {
                 galleryItems.push({
                     id: gallery.category + "-gallery-" + index,
                     title: image.title,
+                    image: image.image,
+                    category: gallery.category,
                     shortDescription: "Image from the " + getCategoryName(gallery.category) + " gallery."
                 });
             });
         });
+
         const allItems = [].concat(
-            data.contentCards || [], data.trailersAndMedia || [], data.audioClips || [],
-            galleryItems, data.characterProfiles || [], data.eventHighlights || [],
-            data.merchandiseShowcase || [], data.upcomingReleases || []
+            data.contentCards || [],
+            data.trailersAndMedia || [],
+            data.audioClips || [],
+            galleryItems,
+            data.characterProfiles || [],
+            data.eventHighlights || [],
+            data.merchandiseShowcase || [],
+            data.upcomingReleases || []
         );
+
         const saved = getSavedList("fandom_bookmarks");
+        if (!saved.length) {
+            $("#BookmarksGrid").html('<div class="col-12 text-center py-5"><p class="empty-message">Nothing saved yet. Browse any category, article, or trailer and click Save.</p></div>');
+            return;
+        }
+
         let html = "";
         saved.forEach(function (bookmark, index) {
-            const item = allItems.find(function (entry) { return entry.id === bookmark.id; });
+            const item = allItems.find(function (entry) { return String(entry.id) === String(bookmark.id); });
             const title = bookmark.title || (item && (item.title || item.name || item.label)) || "Saved item";
             const note = sessionStorage.getItem("note-" + bookmark.id) || "";
-            html += '<div class="col-md-6"><article class="bookmark-card"><h2>' + safeText(title) + '</h2><p>' + safeText(item ? item.shortDescription || item.description || item.biography : bookmark.kind) + '</p><label for="note-' + index + '">Session note</label><textarea id="note-' + index + '" class="form-control" data-note-id="' + safeText(bookmark.id) + '" rows="2" placeholder="Only kept until this browser tab closes">' + safeText(note) + '</textarea><button class="simple-button quiet-button" data-remove-bookmark="' + index + '">Remove</button></article></div>';
+            const desc = item ? (item.shortDescription || item.description || item.biography || "") : "Saved in your bookmarks.";
+            const bKind = (bookmark.kind || "").toLowerCase();
+            const bId = String(bookmark.id || "");
+
+            let icon = "fa-solid fa-bookmark";
+            let kindLabel = "Bookmark";
+            if (bKind === "article" || bKind === "content" || bId.startsWith("c-")) {
+                icon = "fa-regular fa-newspaper";
+                kindLabel = "Article Story";
+            } else if (bKind === "character" || bId.startsWith("char-")) {
+                icon = "fa-solid fa-users";
+                kindLabel = "Character Profile";
+            } else if (bKind === "event" || bId.startsWith("evt-")) {
+                icon = "fa-regular fa-calendar";
+                kindLabel = "Event Highlight";
+            } else if (bKind === "media" || bKind === "trailer" || bId.startsWith("media-")) {
+                icon = "fa-solid fa-clapperboard";
+                kindLabel = "Trailer / Video";
+            } else if (bKind === "audio" || bId.startsWith("audio-")) {
+                icon = "fa-solid fa-headphones";
+                kindLabel = "Audio Clip";
+            } else if (bKind === "merch" || bId.startsWith("merch-")) {
+                icon = "fa-solid fa-bag-shopping";
+                kindLabel = "Merchandise";
+            } else if (bKind === "release" || bId.startsWith("release-")) {
+                icon = "fa-regular fa-calendar-check";
+                kindLabel = "Upcoming Release";
+            }
+
+            html += `
+                <div class="col-md-6 col-lg-6 mb-3">
+                    <article class="bookmark-card h-100 d-flex flex-column justify-content-between p-3 rounded border border-secondary" style="background: rgba(18, 20, 36, 0.85);">
+                        <div>
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="content-tag"><i class="${icon} me-1"></i>${kindLabel}</span>
+                                ${item && item.category ? '<span class="badge bg-dark border border-secondary text-purple">' + safeText(getCategoryName(item.category)) + '</span>' : ''}
+                            </div>
+                            <h3 class="text-white fs-5 fw-bold mb-2">${safeText(title)}</h3>
+                            <p class="small text-muted mb-3" style="line-height: 1.5;">${safeText(desc)}</p>
+                        </div>
+
+                        <div>
+                            <label for="note-${index}" class="small text-muted d-block mb-1">Session note</label>
+                            <textarea id="note-${index}" class="form-control bg-dark text-white border-secondary mb-3" data-note-id="${safeText(bookmark.id)}" rows="2" placeholder="Temporary note for this session...">${safeText(note)}</textarea>
+                            
+                            <div class="bookmark-actions-row d-flex align-items-center justify-content-end">
+                                <button class="simple-button quiet-button btn-sm" data-remove-bookmark="${index}" title="Remove bookmark">
+                                    <i class="fa-regular fa-trash-can me-1"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>`;
         });
-        $("#BookmarksGrid").html(html || '<p class="empty-message">Nothing saved yet. Browse a category and choose Save.</p>');
+        $("#BookmarksGrid").html(html);
     });
-    $(document).off("input", "[data-note-id]").on("input", "[data-note-id]", function () { sessionStorage.setItem("note-" + $(this).data("note-id"), $(this).val()); });
+
+    $(document).off("input", "[data-note-id]").on("input", "[data-note-id]", function () {
+        sessionStorage.setItem("note-" + $(this).data("note-id"), $(this).val());
+    });
+
     $(document).off("click", "[data-remove-bookmark]").on("click", "[data-remove-bookmark]", function () {
-        const saved = getSavedList("fandom_bookmarks"); const removed = saved.splice(Number($(this).data("remove-bookmark")), 1)[0];
+        const saved = getSavedList("fandom_bookmarks");
+        const removed = saved.splice(Number($(this).data("remove-bookmark")), 1)[0];
         if (removed) sessionStorage.removeItem("note-" + removed.id);
-        localStorage.setItem("fandom_bookmarks", JSON.stringify(saved)); loadBookmarksPage();
+        localStorage.setItem("fandom_bookmarks", JSON.stringify(saved));
+        loadBookmarksPage();
     });
-    $("#clearBookmarks").off("click").on("click", function () { localStorage.setItem("fandom_bookmarks", "[]"); loadBookmarksPage(); });
+
+    $("#clearBookmarks").off("click").on("click", function () {
+        if (typeof FandomAlert !== "undefined" && FandomAlert.confirm) {
+            FandomAlert.confirm("Clear All Bookmarks?", "Are you sure you want to remove all saved bookmarks?", "Yes, clear all", "Cancel")
+                .then(function (confirmed) {
+                    if (confirmed) {
+                        localStorage.setItem("fandom_bookmarks", "[]");
+                        loadBookmarksPage();
+                    }
+                });
+        } else {
+            localStorage.setItem("fandom_bookmarks", "[]");
+            loadBookmarksPage();
+        }
+    });
+
     $("#exportBookmarks").off("click").on("click", function () {
         const saved = getSavedList("fandom_bookmarks");
         const text = saved.map(function (item) { return "• " + item.title + " (" + item.kind + ")"; }).join("\n") || "No bookmarks saved.";
-        const link = document.createElement("a"); link.href = URL.createObjectURL(new Blob(["FandomVerse bookmarks\n\n" + text], { type: "text/plain" })); link.download = "fandomverse-bookmarks.txt"; link.click(); URL.revokeObjectURL(link.href);
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(new Blob(["FandomVerse bookmarks\n\n" + text], { type: "text/plain" }));
+        link.download = "fandomverse-bookmarks.txt";
+        link.click();
+        URL.revokeObjectURL(link.href);
     });
 }
 
@@ -1201,49 +1451,181 @@ function addChatMessage(text, className) {
 }
 
 function answerChat(question) {
-    const words = String(question || "").toLowerCase();
+    const rawQuestion = String(question || "").trim();
+    if (!rawQuestion) return;
+    const words = rawQuestion.toLowerCase();
+
     $.getJSON("data.json", function (data) {
+        // 1. Greetings
+        if (/^(hi|hello|hey|salam|assalam|greetings|good\s*(morning|afternoon|evening))\b/.test(words)) {
+            addChatMessage("Hello! Welcome to FandomVerse AI Assistant. I can help answer FAQs about our 7 fandom worlds, guide you across the site, recommend content, or assist with shop merchandise and bookmarks. What would you like to explore?", "chat-answer");
+            const suggestions = ["Explore Categories", "Shop Merch", "View Characters", "Upcoming Releases"];
+            suggestions.forEach(function (reply) {
+                $("#chatMessages").append('<button class="chat-reply" type="button" data-question="' + safeText(reply) + '">' + safeText(reply) + '</button>');
+            });
+            $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
+            return;
+        }
+
+        // 2. Cart & Checkout Assistance
+        if (words.includes("cart") || words.includes("checkout") || words.includes("order") || words.includes("buy")) {
+            addChatMessage("You can review your fan merchandise in the shopping cart, adjust quantities, and complete checkout using Cash on Delivery or Credit/Debit Card options.", "chat-answer");
+            $("#chatMessages").append('<a class="chat-link" href="?page=cart" data-page="cart"><i class="fa-solid fa-cart-shopping me-1"></i>Open Shopping Cart</a>');
+            ["Payment Methods", "Go to Shop"].forEach(function (reply) {
+                $("#chatMessages").append('<button class="chat-reply" type="button" data-question="' + safeText(reply) + '">' + safeText(reply) + '</button>');
+            });
+            $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
+            return;
+        }
+
+        // 3. Payment Methods
+        if (words.includes("payment") || words.includes("credit card") || words.includes("debit card") || words.includes("cod") || words.includes("cash on delivery")) {
+            addChatMessage("We support Cash on Delivery and Credit/Debit Cards. When paying by card, simply input your 16-digit card number and payment amount in the checkout modal.", "chat-answer");
+            $("#chatMessages").append('<a class="chat-link" href="?page=cart" data-page="cart"><i class="fa-solid fa-credit-card me-1"></i>Checkout Now</a>');
+            $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
+            return;
+        }
+
+        // 4. Recommendations
         const chosenCategory = fandomCategories.find(function (item) { return words.includes(item.id) || words.includes(item.name.toLowerCase()); });
-        if (words.includes("cart")) {
-            addChatMessage("Your sample cart is saved in this browser. It has no checkout or payment step.", "chat-answer");
-            $("#chatMessages").append('<a class="chat-link" href="?page=cart" data-page="cart">Open your cart</a>');
-            return;
-        }
-        if (chosenCategory && (words.includes("recommend") || words.includes("suggest") || words.includes("like") || words.includes("interest"))) {
+        if (chosenCategory && (words.includes("recommend") || words.includes("suggest") || words.includes("like") || words.includes("interest") || words.includes("best"))) {
             const pick = (data.contentCards || []).find(function (item) { return item.category === chosenCategory.id; });
-            const suggestion = pick ? pick.title + " — " + pick.shortDescription : "Browse the category hub to find a new favorite.";
-            addChatMessage("For " + chosenCategory.name + ", try: " + suggestion, "chat-answer");
-            $("#chatMessages").append('<a class="chat-link" href="?page=category&type=' + chosenCategory.id + '" data-page="category">Open "' + safeText(chosenCategory.name) + '" hub</a>');
+            const suggestion = pick ? pick.title + " — " + pick.shortDescription : "Browse the category hub to discover exciting stories and characters.";
+            addChatMessage("For " + chosenCategory.name + ", check out: " + suggestion, "chat-answer");
+            $("#chatMessages").append('<a class="chat-link" href="?page=category&type=' + encodeURIComponent(chosenCategory.id) + '" data-page="category"><i class="fa-solid fa-compass me-1"></i>Explore ' + safeText(chosenCategory.name) + ' Hub</a>');
+            $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
             return;
         }
+
+        // 5. Keyword Matching against chatbotDataset
         const rules = data.chatbotDataset || [];
-        let answer = rules.find(function (rule) { return rule.keywords.some(function (word) { return words.includes(word); }); });
-        if (!answer && words.includes("bookmark")) answer = { response: "Open Bookmarks to see your saved items. Notes last only for this browser session.", targetPage: "bookmarks" };
-        if (!answer && (words.includes("anime") || words.includes("game") || words.includes("movie") || words.includes("manga"))) answer = { response: "Open a category hub to browse its articles, characters, images, media, and events.", targetPage: "category" };
-        if (!answer) answer = { response: "I can help you find categories, character profiles, events, trailers, bookmarks, and merchandise. What would you like to explore?", targetPage: "category" };
-        addChatMessage(answer.response, "chat-answer");
-        if (answer.targetPage) {
-            const label = answer.targetPage === "category" ? "Open category hubs" : "Open " + answer.targetPage;
-            $("#chatMessages").append('<a class="chat-link" href="?page=' + safeText(answer.targetPage) + '" data-page="' + safeText(answer.targetPage) + '">' + safeText(label) + '</a>');
+        let matchedRule = rules.find(function (rule) {
+            return (rule.keywords || []).some(function (k) {
+                return words.includes(k.toLowerCase());
+            });
+        });
+
+        if (!matchedRule) {
+            if (words.includes("bookmark") || words.includes("save")) {
+                matchedRule = {
+                    response: "You can save articles, character profiles, trailers, and releases to your Bookmarks. Note that you must be logged in to view and save bookmarks!",
+                    targetPage: "bookmarks",
+                    suggestedQuickReplies: ["My Bookmarks", "Login / Sign In"]
+                };
+            } else if (words.includes("anime") || words.includes("game") || words.includes("movie") || words.includes("manga") || words.includes("comic") || words.includes("kpop")) {
+                matchedRule = {
+                    response: "Explore our Category Hubs to discover character profiles, video trailers, articles, and upcoming events across all 7 fan universes.",
+                    targetPage: "category",
+                    suggestedQuickReplies: ["Anime Hub", "Gaming Hub", "Watch Trailers"]
+                };
+            } else {
+                matchedRule = {
+                    response: "I'm here to help! Ask me about character profiles, upcoming releases, shop merchandise, event conventions, trailers, or how to bookmark items.",
+                    targetPage: "category",
+                    suggestedQuickReplies: ["View Characters", "Upcoming Releases", "Shop Merch", "View Events"]
+                };
+            }
         }
-        (answer.suggestedQuickReplies || []).slice(0, 3).forEach(function (reply) { $("#chatMessages").append('<button class="chat-reply" type="button" data-question="' + safeText(reply) + '">' + safeText(reply) + '</button>'); });
+
+        addChatMessage(matchedRule.response, "chat-answer");
+
+        if (matchedRule.targetPage) {
+            const cleanTarget = String(matchedRule.targetPage).replace(/\.html$/, "");
+            const pageLabels = {
+                characters: "View Characters",
+                shop: "Go to Fan Shop",
+                cart: "Open Cart & Checkout",
+                events: "Browse Events",
+                home: "Upcoming Releases Calendar",
+                trailers: "Watch Trailers",
+                bookmarks: "View Bookmarks",
+                login: "Sign In / Register",
+                about: "About FandomVerse",
+                contact: "Contact Us",
+                category: "Explore Category Hubs"
+            };
+            const label = pageLabels[cleanTarget] || ("Open " + cleanTarget);
+            $("#chatMessages").append('<a class="chat-link" href="?page=' + safeText(cleanTarget) + '" data-page="' + safeText(cleanTarget) + '"><i class="fa-solid fa-arrow-up-right-from-square me-1"></i>' + safeText(label) + '</a>');
+        }
+
+        (matchedRule.suggestedQuickReplies || []).slice(0, 3).forEach(function (reply) {
+            $("#chatMessages").append('<button class="chat-reply" type="button" data-question="' + safeText(reply) + '">' + safeText(reply) + '</button>');
+        });
+
+        $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
     });
 }
 
+// Global Document Initialization & Event Listeners
 $(function () {
-    initDefaultUsers();
-    updateAuthUI();
-    updateCartCount();
-    $(document).on("click", "#chatOpen", function () { $("#chatBox").prop("hidden", false); $("#chatInput").trigger("focus"); });
-    $(document).on("click", "#chatClose", function () { $("#chatBox").prop("hidden", true); });
-    $(document).on("submit", "#chatForm", function (event) { event.preventDefault(); const question = $("#chatInput").val().trim(); if (!question) return; addChatMessage(question, "chat-question"); $("#chatInput").val(""); answerChat(question); });
-    $(document).on("click", "[data-question]", function () { const question = $(this).data("question"); addChatMessage(question, "chat-question"); answerChat(question); });
-    $(document).on("click", "#btnModalWatchlist", function () { addBookmark("media-" + Date.now(), $(this).data("video-title") || "Featured video", "media"); });
-    $(document).on("submit", ".newsletter-form", function (event) { event.preventDefault(); if (typeof FandomAlert !== "undefined") { FandomAlert.success("Subscribed!", "Thanks for joining the newsletter!"); } else { alert("Thanks for joining the newsletter!"); } this.reset(); });
-    $(document).on("click", "[data-save-home]", function () { addBookmark($(this).data("save-home"), $(this).data("title"), "content"); });
-    $(document).on("click", "[data-save-media]", function () { addBookmark($(this).data("save-media"), $(this).data("title"), "media"); });
-    $(document).on("click", ".nav-link[data-page]", function () { $(".nav-link").removeClass("active"); $(this).addClass("active"); });
-    $(document).on("click", "[data-page='home']", function () { $(".nav-link").removeClass("active").filter("[data-page='home']").addClass("active"); });
+    if (typeof initDefaultUsers === "function") initDefaultUsers();
+    if (typeof updateAuthUI === "function") updateAuthUI();
+    if (typeof updateCartCount === "function") updateCartCount();
+
+    // Chatbot Open & Close
+    $(document).off("click", "#chatOpen").on("click", "#chatOpen", function () {
+        $("#chatBox").prop("hidden", false);
+        $("#chatInput").trigger("focus");
+    });
+    $(document).off("click", "#chatClose").on("click", "#chatClose", function () {
+        $("#chatBox").prop("hidden", true);
+    });
+
+    // Chatbot Form Submit & Quick Replies
+    $(document).off("submit", "#chatForm").on("submit", "#chatForm", function (event) {
+        event.preventDefault();
+        const question = $("#chatInput").val().trim();
+        if (!question) return;
+        addChatMessage(question, "chat-question");
+        $("#chatInput").val("");
+        answerChat(question);
+    });
+    $(document).off("click", "[data-question]").on("click", "[data-question]", function () {
+        const question = $(this).data("question");
+        addChatMessage(question, "chat-question");
+        answerChat(question);
+    });
+
+    // Landing Page Featured Highlights Bookmarks
+    $(document).off("click", "[data-save-home]").on("click", "[data-save-home]", function (e) {
+        e.preventDefault();
+        const id = $(this).data("save-home");
+        const title = $(this).data("title") || "Featured Story";
+        addBookmark(id, title, "content");
+    });
+
+    // Trailers / Media Bookmarks
+    $(document).off("click", "[data-save-media]").on("click", "[data-save-media]", function (e) {
+        e.preventDefault();
+        const id = $(this).data("save-media");
+        const title = $(this).data("title") || "Trailer";
+        addBookmark(id, title, "media");
+    });
+
+    // Modal Watchlist Bookmark
+    $(document).off("click", "#btnModalWatchlist").on("click", "#btnModalWatchlist", function () {
+        addBookmark("media-" + Date.now(), $(this).data("video-title") || "Featured video", "media");
+    });
+
+    // Newsletter Subscription Form
+    $(document).off("submit", ".newsletter-form").on("submit", ".newsletter-form", function (event) {
+        event.preventDefault();
+        if (typeof FandomAlert !== "undefined") {
+            FandomAlert.success("Subscribed!", "Thanks for joining the FandomVerse newsletter!");
+        } else {
+            alert("Thanks for joining the newsletter!");
+        }
+        this.reset();
+    });
+
+    // Global navigation active pills
+    $(document).off("click", ".nav-link[data-page]").on("click", ".nav-link[data-page]", function () {
+        $(".nav-link").removeClass("active");
+        $(this).addClass("active");
+    });
+    $(document).off("click", "[data-page='home']").on("click", "[data-page='home']", function () {
+        $(".nav-link").removeClass("active").filter("[data-page='home']").addClass("active");
+    });
 });
 
 function loadArticlesPage() {
@@ -1319,7 +1701,9 @@ function loadCharactersPage() {
         }
         select.off("change").on("change", showCharacters);
         seriesSelect.off("change").on("change", showCharacters);
-        showCharacters();
+                showCharacters();
+
+
         $(document).off("click", "[data-character-profile]").on("click", "[data-character-profile]", function () {
             const person = (data.characterProfiles || []).find(function (item) { return item.id === $(this).data("character-profile"); }.bind(this));
             if (!person) return;

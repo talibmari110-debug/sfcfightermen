@@ -50,6 +50,14 @@ function loadHomeData() {
                     </div>`;
             });
             $("#FeaturedListing").html(featHtml);
+
+            // Featured Highlights Bookmark click handler
+            $(document).off("click", "[data-save-home]").on("click", "[data-save-home]", function (e) {
+                e.preventDefault();
+                if (typeof addBookmark === "function") {
+                    addBookmark($(this).data("save-home"), $(this).data("title"), "content");
+                }
+            });
         }
 
         // 3. Render Trailers
@@ -83,22 +91,98 @@ function loadHomeData() {
             $("#EventsListing").html(eventHtml);
         }
 
-        // 5. Show the release dates in the local content list.
+        // 5. UPCOMING RELEASES CALENDAR (Interactive Schedule & Filters)
         if ($("#ReleaseListing").length && data.upcomingReleases) {
-            let releaseHtml = "";
-            $.each(data.upcomingReleases, function (i, release) {
-                releaseHtml += `
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <article class="event-card">
-                            <span class="content-tag">${release.category}</span>
-                            <h3>${safeText(release.title)}</h3>
-                            <p>${safeText(release.description)}</p>
-                            <strong>${safeText(release.date)}</strong>
-                            <a class="release-source" href="${safeText(release.source)}" target="_blank" rel="noopener noreferrer">Official details <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-                        </article>
-                    </div>`;
+            let activeCat = "all";
+            let activeMonth = "all";
+
+            function parseReleaseDate(dateStr) {
+                const parts = (dateStr || "").split(" ");
+                let month = "2026";
+                let day = "TBA";
+                if (parts.length >= 2) {
+                    month = parts[0].substring(0, 3).toUpperCase();
+                    day = parseInt(parts[1], 10) || "TBA";
+                    if (typeof day === "number" && day < 10) day = "0" + day;
+                } else if (dateStr) {
+                    month = dateStr.substring(0, 4).toUpperCase();
+                    day = "26";
+                }
+                return { month: month, day: day };
+            }
+
+            function renderUpcomingReleases() {
+                let filtered = data.upcomingReleases.filter(function (release) {
+                    const matchCat = (activeCat === "all" || release.category === activeCat);
+                    const matchMonth = (activeMonth === "all" || (release.date && release.date.toLowerCase().includes(activeMonth.toLowerCase())));
+                    return matchCat && matchMonth;
+                });
+
+                if (!filtered.length) {
+                    $("#ReleaseListing").html('<div class="col-12 text-center py-5 text-muted"><i class="fa-regular fa-calendar-xmark fs-2 mb-2 d-block"></i>No upcoming releases found matching this filter.</div>');
+                    return;
+                }
+
+                let releaseHtml = "";
+                $.each(filtered, function (i, release) {
+                    const parsed = parseReleaseDate(release.date);
+                    const fallbackImg = typeof getCategoryImage === "function" ? getCategoryImage(release.category) : "images/logo.png";
+                    const imgSrc = release.image || fallbackImg;
+
+                    releaseHtml += `
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 release-item-col" data-release-id="${release.id}">
+                            <article class="release-calendar-card">
+                                <div class="release-card-cover">
+                                    <img src="${safeText(imgSrc)}" alt="${safeText(release.title)}" loading="lazy" class="release-poster-img" onerror="this.src='${fallbackImg}'">
+                                    <span class="release-category-badge">${safeText(release.category.toUpperCase())}</span>
+                                    <div class="calendar-date-block">
+                                        <span class="cal-month">${parsed.month}</span>
+                                        <span class="cal-day">${parsed.day}</span>
+                                    </div>
+                                </div>
+                                <div class="release-card-body">
+                                    <div class="release-meta-date">
+                                        <i class="fa-regular fa-calendar-check me-1 text-purple"></i> ${safeText(release.date)}
+                                    </div>
+                                    <h3 class="release-title">${safeText(release.title)}</h3>
+                                    <p class="release-desc">${safeText(release.description)}</p>
+                                    <div class="release-card-actions">
+                                        <a class="release-source-btn" href="${safeText(release.source)}" target="_blank" rel="noopener noreferrer">
+                                            <span>Official details</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </a>
+                                        <button class="release-bookmark-btn" data-save-release="${safeText(release.id)}" data-title="${safeText(release.title)}" title="Bookmark release" aria-label="Bookmark release">
+                                            <i class="fa-regular fa-bookmark"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>`;
+                });
+                $("#ReleaseListing").html(releaseHtml);
+            }
+
+            // Category filter click
+            $(document).off("click", "#releaseCategoryPills button").on("click", "#releaseCategoryPills button", function () {
+                $("#releaseCategoryPills button").removeClass("active");
+                $(this).addClass("active");
+                activeCat = $(this).data("release-cat") || "all";
+                renderUpcomingReleases();
             });
-            $("#ReleaseListing").html(releaseHtml);
+
+            // Month filter click
+            $(document).off("click", "#releaseMonthPills button").on("click", "#releaseMonthPills button", function () {
+                $("#releaseMonthPills button").removeClass("active");
+                $(this).addClass("active");
+                activeMonth = $(this).data("release-month") || "all";
+                renderUpcomingReleases();
+            });
+
+            // Bookmark release click handler (with auth requirement)
+            $(document).off("click", "[data-save-release]").on("click", "[data-save-release]", function () {
+                addBookmark($(this).data("save-release"), $(this).data("title"), "release");
+            });
+
+            renderUpcomingReleases();
         }
 
         // 5. Render Merchandise
@@ -247,7 +331,7 @@ function loadTrailersData() {
                 return;
             }
 
-            renderFeaturedHeroTrailer();
+                        renderFeaturedHeroTrailer();
             renderTrailersGrid();
         },
         error: function (xhr, status, error) {
@@ -406,8 +490,8 @@ function renderTrailersGrid() {
                             <button onclick="playTrailerModal('${embedUrl}', '${title}', '${cat}')" class="btn btn-sm btn-outline-light rounded-pill">
                                 Watch Preview
                             </button>
-                            <button data-save-media="${item.id}" data-title="${title}" class="trailer-bookmark-btn" title="Save to bookmarks" aria-label="Save to bookmarks">
-                                <i class="fa-regular fa-bookmark"></i>
+                            <button data-save-media="${item.id}" data-title="${title}" class="btn btn-sm btn-outline-light" title="Save to bookmarks">
+                                <i class="fa-regular fa-bookmark me-1"></i> Bookmark
                             </button>
                         </div>
                     </div>

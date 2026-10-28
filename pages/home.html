@@ -94,15 +94,42 @@
     </div>
 </section>
 
-<section class="site-section py-5">
+<!-- 5. UPCOMING RELEASES CALENDAR -->
+<section class="site-section py-5 bg-dark-secondary" id="releases-calendar-section">
     <div class="container-fluid px-4">
-        <div class="section-title mb-5">
-            <span class="section-note">MARK YOUR CALENDAR</span>
-            <h2 class="fw-bold text-white display-6"><i class="fa-regular fa-calendar-check me-2 purple-icon"></i>Upcoming <span class="purple-text">Releases</span></h2>
-            <p class="section-note">Dates can change. Use each official link for the latest details.</p>
+        <div class="section-title mb-4">
+            <span class="section-note">OFFICIAL PREMIERE SCHEDULE</span>
+            <h2 class="fw-bold text-white display-6">
+                <i class="fa-regular fa-calendar-days me-2 purple-icon"></i>Upcoming Releases <span class="purple-text">Calendar</span>
+            </h2>
+            <p class="section-note">Stay updated with confirmed upcoming premiere dates across all fandoms. Filter by fandom or month.</p>
             <div class="title-line"></div>
         </div>
-        <div class="row g-4" id="ReleaseListing"></div>
+
+        <!-- Calendar Filter Toolbar -->
+        <div class="release-calendar-toolbar">
+            <div class="release-filter-pills" id="releaseCategoryPills">
+                <button class="release-pill-btn active" data-release-cat="all">All Fandoms</button>
+                <button class="release-pill-btn" data-release-cat="anime">Anime</button>
+                <button class="release-pill-btn" data-release-cat="gaming">Gaming</button>
+                <button class="release-pill-btn" data-release-cat="movies">Movies</button>
+                <button class="release-pill-btn" data-release-cat="tv-shows">TV Shows</button>
+                <button class="release-pill-btn" data-release-cat="kpop">K-Pop</button>
+                <button class="release-pill-btn" data-release-cat="comics">Comics</button>
+                <button class="release-pill-btn" data-release-cat="manga">Manga</button>
+            </div>
+            <div class="release-filter-pills" id="releaseMonthPills">
+                <button class="release-pill-btn active" data-release-month="all">All Dates</button>
+                <button class="release-pill-btn" data-release-month="october">Oct 2026</button>
+                <button class="release-pill-btn" data-release-month="november">Nov 2026</button>
+                <button class="release-pill-btn" data-release-month="december">Dec 2026</button>
+            </div>
+        </div>
+
+        <!-- Calendar Grid -->
+        <div class="row g-4" id="ReleaseListing">
+            <!-- Dynamically populated via jQuery AJAX -->
+        </div>
     </div>
 </section>
 

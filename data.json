@@ -1106,128 +1106,292 @@
   ],
   "chatbotDataset": [
     {
-      "id": "rule-01",
+      "id": "rule-characters",
       "keywords": [
         "character",
+        "characters",
         "profile",
+        "profiles",
         "hero",
-        "who is",
-        "biography"
+        "biography",
+        "traits",
+        "who is"
       ],
-      "response": "You can explore detailed character profiles with biographies and traits across all 7 categories in our Category Hubs!",
+      "response": "Explore comprehensive character profiles with biographies, traits, and series backstories across Anime, Gaming, Comics, and more!",
       "suggestedQuickReplies": [
         "View Characters",
         "Explore Anime Hub"
       ],
-      "targetPage": "category.html"
+      "targetPage": "characters"
     },
     {
-      "id": "rule-02",
+      "id": "rule-shop",
       "keywords": [
-        "merch",
         "shop",
+        "merch",
+        "merchandise",
         "t-shirt",
-        "cart",
+        "figures",
         "buy",
-        "price"
+        "store",
+        "price",
+        "pricing"
       ],
-      "response": "Check out our Merchandise Showcase to view items, check price ranges, and add products to your temporary cart!",
+      "response": "Visit our Fan Shop to browse exclusive collectibles, apparel, figures, and merchandise with 100% free shipping!",
       "suggestedQuickReplies": [
         "Go to Shop",
+        "Payment Methods",
         "View Cart"
       ],
-      "targetPage": "shop.html"
+      "targetPage": "shop"
     },
     {
-      "id": "rule-03",
+      "id": "rule-cart",
+      "keywords": [
+        "cart",
+        "checkout",
+        "order",
+        "place order",
+        "billing"
+      ],
+      "response": "In your Shopping Cart, you can adjust item quantities, review order totals, and complete your purchase using Cash on Delivery or Credit/Debit Card.",
+      "suggestedQuickReplies": [
+        "Open Cart",
+        "Go to Shop",
+        "Payment Methods"
+      ],
+      "targetPage": "cart"
+    },
+    {
+      "id": "rule-payment",
+      "keywords": [
+        "payment",
+        "credit card",
+        "debit card",
+        "cod",
+        "cash on delivery",
+        "card",
+        "pay"
+      ],
+      "response": "We support Cash on Delivery and Credit/Debit Cards (Visa, Mastercard, etc.). For card payments, enter your 16-digit card number and amount at checkout.",
+      "suggestedQuickReplies": [
+        "View Cart",
+        "Go to Shop"
+      ],
+      "targetPage": "cart"
+    },
+    {
+      "id": "rule-events",
       "keywords": [
         "event",
+        "events",
         "expo",
         "convention",
+        "con",
         "schedule",
-        "date"
+        "date",
+        "dates",
+        "comic-con",
+        "anime expo"
       ],
-      "response": "We have highlights for past and upcoming events like Anime Expo and Comic-Con with locations and dates.",
+      "response": "Browse upcoming and past global fandom events, expos, and conventions with full schedules, dates, and locations.",
       "suggestedQuickReplies": [
-        "View Events"
+        "View Events",
+        "Upcoming Releases"
       ],
-      "targetPage": "events.html"
+      "targetPage": "events"
     },
     {
-      "id": "rule-anime",
+      "id": "rule-releases",
       "keywords": [
-        "anime"
+        "release",
+        "releases",
+        "calendar",
+        "upcoming",
+        "premiere",
+        "launch date"
       ],
-      "response": "Explore Anime for original sample profiles, image galleries, articles, trailers, and community events.",
+      "response": "Check our Upcoming Releases Calendar on the landing page to keep track of upcoming anime, game, movie, and comic drops with category and month filters!",
       "suggestedQuickReplies": [
-        "Show anime characters",
-        "Show anime events"
+        "Upcoming Releases",
+        "Watch Trailers"
       ],
-      "targetPage": "category"
+      "targetPage": "home"
     },
     {
-      "id": "rule-games",
-      "keywords": [
-        "gaming",
-        "game"
-      ],
-      "response": "The Gaming hub has sample articles, characters, images, media, events, and collectibles.",
-      "suggestedQuickReplies": [
-        "Gaming characters",
-        "Gaming shop"
-      ],
-      "targetPage": "category"
-    },
-    {
-      "id": "rule-trailer",
+      "id": "rule-trailers",
       "keywords": [
         "trailer",
+        "trailers",
         "video",
-        "watch"
+        "videos",
+        "teaser",
+        "watch",
+        "preview",
+        "media"
       ],
-      "response": "The Trailers page collects video previews across the fandom categories.",
+      "response": "Watch official trailers, gameplay reveals, and exclusive video previews from across our fandom categories in high quality!",
       "suggestedQuickReplies": [
-        "Show trailers"
+        "Watch Trailers",
+        "View Characters"
       ],
       "targetPage": "trailers"
     },
     {
-      "id": "rule-about",
+      "id": "rule-bookmarks",
       "keywords": [
-        "about",
-        "who made",
-        "project"
+        "bookmark",
+        "bookmarks",
+        "save",
+        "saved",
+        "favorite",
+        "watchlist"
       ],
-      "response": "FandomVerse is a front-end student project built around seven fandom categories.",
+      "response": "You can bookmark articles, characters, trailers, and upcoming releases to your account. Remember to sign in to access your saved bookmarks!",
       "suggestedQuickReplies": [
-        "Contact the team"
+        "My Bookmarks",
+        "Login / Sign In"
       ],
-      "targetPage": "about"
+      "targetPage": "bookmarks"
+    },
+    {
+      "id": "rule-auth",
+      "keywords": [
+        "login",
+        "sign in",
+        "register",
+        "signup",
+        "sign up",
+        "account",
+        "profile"
+      ],
+      "response": "Create a free FandomVerse account or sign in to save bookmarks, add items to your shopping cart, and track your recent orders.",
+      "suggestedQuickReplies": [
+        "Login",
+        "Register",
+        "My Cart"
+      ],
+      "targetPage": "login"
+    },
+    {
+      "id": "rule-anime",
+      "keywords": [
+        "anime",
+        "manga",
+        "otaku"
+      ],
+      "response": "Dive into the Anime hub for character profiles, storyline breakdowns, episode releases, and trailers from popular anime series!",
+      "suggestedQuickReplies": [
+        "Explore Anime",
+        "View Characters",
+        "Watch Trailers"
+      ],
+      "targetPage": "category"
+    },
+    {
+      "id": "rule-gaming",
+      "keywords": [
+        "gaming",
+        "game",
+        "games",
+        "playstation",
+        "xbox",
+        "pc"
+      ],
+      "response": "The Gaming hub features game releases, character rosters, trailers, and gaming collectibles across all platforms.",
+      "suggestedQuickReplies": [
+        "Gaming Hub",
+        "Watch Trailers",
+        "Shop Merch"
+      ],
+      "targetPage": "category"
+    },
+    {
+      "id": "rule-movies",
+      "keywords": [
+        "movie",
+        "movies",
+        "cinema",
+        "film",
+        "films",
+        "tv",
+        "tv-shows",
+        "series"
+      ],
+      "response": "Explore the Movies & TV Shows hubs for theatrical releases, streaming series, cast bios, and video trailers.",
+      "suggestedQuickReplies": [
+        "Movies Hub",
+        "Watch Trailers"
+      ],
+      "targetPage": "category"
+    },
+    {
+      "id": "rule-kpop",
+      "keywords": [
+        "kpop",
+        "k-pop",
+        "music",
+        "idol",
+        "idols"
+      ],
+      "response": "Discover K-Pop idol profiles, discography highlights, music video teasers, and community events.",
+      "suggestedQuickReplies": [
+        "Browse Gallery",
+        "View Events"
+      ],
+      "targetPage": "category"
+    },
+    {
+      "id": "rule-comics",
+      "keywords": [
+        "comic",
+        "comics",
+        "marvel",
+        "dc",
+        "superhero"
+      ],
+      "response": "The Comics world gathers superhero profiles, comic storylines, issue releases, and collectible merchandise.",
+      "suggestedQuickReplies": [
+        "View Characters",
+        "Explore Comics"
+      ],
+      "targetPage": "category"
     },
     {
       "id": "rule-contact",
       "keywords": [
         "contact",
-        "message",
-        "team"
+        "contact us",
+        "support",
+        "help",
+        "email",
+        "address",
+        "phone",
+        "team",
+        "aptech"
       ],
-      "response": "Use the Contact page to check a message form or open the community map.",
+      "response": "Get in touch with our team via the Contact page or visit us at Aptech Shahrah-e-Faisal. You can also connect on our official social channels!",
       "suggestedQuickReplies": [
-        "Open contact"
+        "Contact Us",
+        "About Project"
       ],
       "targetPage": "contact"
     },
     {
-      "id": "rule-release",
+      "id": "rule-about",
       "keywords": [
-        "release",
-        "upcoming"
+        "about",
+        "about us",
+        "who made",
+        "what is fandomverse",
+        "project"
       ],
-      "response": "Open a category hub and choose Upcoming releases to see the sample release calendar.",
+      "response": "FandomVerse is an immersive entertainment portal connecting seven vibrant fan universes: Anime, Manga, Comics, Movies, TV Shows, Gaming, and K-Pop.",
       "suggestedQuickReplies": [
-        "Browse categories"
+        "About Us",
+        "Explore Fandoms"
       ],
-      "targetPage": "category"
+      "targetPage": "about"
     }
   ],
   "imageGalleries": [

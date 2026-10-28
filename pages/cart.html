@@ -116,10 +116,47 @@
                                     </label>
                                 </div>
                                 <div class="form-check payment-check p-3 rounded border border-secondary flex-fill">
-                                    <input class="form-check-input" type="radio" name="checkoutPayment" id="payCard" value="Credit/Debit Card (Demo)">
+                                    <input class="form-check-input" type="radio" name="checkoutPayment" id="payCard" value="Credit/Debit Card">
                                     <label class="form-check-label ms-2" for="payCard">
                                         <i class="fa-solid fa-credit-card me-1 purple-text"></i> Credit/Debit Card
                                     </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Dynamic Credit/Debit Card Details -->
+                        <div class="col-12" id="cardPaymentFields" style="display: none;">
+                            <div class="p-3 rounded border border-secondary" style="background: rgba(161, 0, 255, 0.08); border-color: rgba(161, 0, 255, 0.4) !important;">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <h6 class="purple-text fw-bold mb-0">
+                                        <i class="fa-solid fa-credit-card me-2"></i>Credit / Debit Card Payment
+                                    </h6>
+                                    <span class="badge bg-dark border border-secondary text-white-50"><i class="fa-solid fa-lock me-1 text-success"></i>Encrypted</span>
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-12 col-md-8">
+                                        <label for="checkoutCardNumber" class="form-label text-muted small fw-bold">Credit Card No <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-dark text-white-50 border-secondary"><i class="fa-regular fa-credit-card"></i></span>
+                                            <input type="text" class="form-control bg-dark text-white border-secondary" id="checkoutCardNumber" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" autocomplete="cc-number">
+                                        </div>
+                                        <small class="text-muted">Enter your 16-digit card number</small>
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label for="checkoutCardAmount" class="form-label text-muted small fw-bold">Amount ($) <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-dark text-white-50 border-secondary">$</span>
+                                            <input type="number" step="0.01" min="0.01" class="form-control bg-dark text-white border-secondary" id="checkoutCardAmount" placeholder="0.00">
+                                        </div>
+                                        <small class="text-muted">Total payment amount</small>
+                                    </div>
+                                    <div class="col-6 col-md-6">
+                                        <label for="checkoutCardExpiry" class="form-label text-muted small fw-bold">Expiry Date</label>
+                                        <input type="text" class="form-control bg-dark text-white border-secondary" id="checkoutCardExpiry" placeholder="MM/YY" maxlength="5">
+                                    </div>
+                                    <div class="col-6 col-md-6">
+                                        <label for="checkoutCardCvv" class="form-label text-muted small fw-bold">CVV Code</label>
+                                        <input type="password" class="form-control bg-dark text-white border-secondary" id="checkoutCardCvv" placeholder="123" maxlength="4">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -155,6 +192,7 @@
                 <div class="p-3 my-3 rounded text-start border border-secondary" style="background:#171324;">
                     <p class="mb-1"><strong>Order ID:</strong> <span id="successOrderId" class="purple-text fw-bold"></span></p>
                     <p class="mb-1"><strong>Date:</strong> <span id="successOrderDate"></span></p>
+                    <p class="mb-1"><strong>Payment:</strong> <span id="successOrderPayment" class="text-white"></span></p>
                     <p class="mb-1"><strong>Total Paid:</strong> <span id="successOrderTotal" class="text-success fw-bold"></span></p>
                     <p class="mb-0"><strong>Status:</strong> <span class="badge bg-success">Confirmed</span></p>
                 </div>
